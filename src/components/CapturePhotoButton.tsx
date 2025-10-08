@@ -1,22 +1,28 @@
 "use client";
 
-import {Camera, Circle} from "lucide-react";
-import {type Ref, useRef, useState} from "react";
+import {Camera as CameraIcon, Circle as CircleIcon} from "lucide-react";
+import {type Ref, useImperativeHandle, useRef, useState} from "react";
 import {Button} from "@heroui/react";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 
 export function CapturePhotoButton() {
-  const [isStreaming, setIsStreaming] = useState(false);
-  const videoRef = useRef<React.ComponentRef<"video">>(null);
-  async function getUserMedia() {
-    const mediaStream = await navigator.mediaDevices.getUserMedia({
-      audio: false,
-      video: {},
-    });
-    if (isDefined(videoRef.current)) {
-      videoRef.current.srcObject = mediaStream;
-      setIsStreaming(true);
+  const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
+  const cameraRef = useRef<React.ComponentRef<typeof Camera>>(null);
+  async function startCamera() {
+    if (isDefined(cameraRef.current)) {
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+        audio: false,
+      });
+      cameraRef.current.srcObject = stream;
+      setMediaStream(stream);
+    }
+  }
+  function stopCamera() {
+    if (isDefined(mediaStream)) {
+      mediaStream.getTracks().forEach((track) => track.stop());
+      setMediaStream(null);
     }
   }
   return (
@@ -25,41 +31,72 @@ export function CapturePhotoButton() {
         color="primary"
         size="lg"
         radius="none"
-        endContent={<Camera />}
+        endContent={<CameraIcon />}
         disableAnimation
         fullWidth
-        onPress={getUserMedia}>
+        onPress={startCamera}>
         Capture photo
       </Button>
-      <Video ref={videoRef} hidden={!isStreaming} />
+      <Camera
+        ref={cameraRef}
+        hidden={!isDefined(mediaStream)}
+        onClose={stopCamera}
+      />
     </>
   );
 }
 
-interface VideoProps {
-  ref: Ref<React.ComponentRef<"video">>;
+interface CameraProps {
+  ref: Ref<{srcObject: MediaStream}>;
   hidden: boolean;
+  onClose: () => void;
 }
 
-function Video({ref, hidden}: VideoProps) {
+function Camera({ref, hidden, onClose}: CameraProps) {
+  const videoRef = useRef<React.ComponentRef<"video">>(null);
+  const canvasRef = useRef<React.ComponentRef<"canvas">>(null);
+  useImperativeHandle(ref, () => ({
+    set srcObject(stream: MediaStream) {
+      if (isDefined(videoRef.current)) {
+        videoRef.current.srcObject = stream;
+      }
+    },
+  }));
+  async function capturePhoto() {
+    if (isDefined(videoRef.current) && isDefined(canvasRef.current)) {
+      const video = videoRef.current;
+      const canvas = canvasRef.current;
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const context = canvas.getContext("2d");
+      if (isDefined(context)) {
+        context.drawImage(video, 0, 0);
+        const dataUrl = canvas.toDataURL("image/png");
+        await navigator.clipboard.writeText(dataUrl);
+        onClose();
+      }
+    }
+  }
   return (
     <div
       className={cn("absolute inset-0", {
         hidden,
       })}>
       <video
-        ref={ref}
+        ref={videoRef}
         className={cn("size-full object-cover")}
         autoPlay
         playsInline
       />
+      <canvas ref={canvasRef} className={cn("hidden")} />
       <Button
         variant="flat"
         size="lg"
         radius="full"
+        className={cn("absolute start-1/2 bottom-10 -translate-x-1/2")}
         isIconOnly
-        className={cn("absolute start-1/2 bottom-10 -translate-x-1/2")}>
-        <Circle className={cn("size-10")} />
+        onPress={capturePhoto}>
+        <CircleIcon className={cn("size-10")} />
       </Button>
     </div>
   );
