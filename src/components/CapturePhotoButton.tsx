@@ -26,8 +26,8 @@ export function CapturePhotoButton() {
         size="lg"
         radius="none"
         endContent={<Camera />}
-        fullWidth
         disableAnimation
+        fullWidth
         onPress={getUserMedia}>
         Capture photo
       </Button>
