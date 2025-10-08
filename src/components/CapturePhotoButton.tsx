@@ -1,3 +1,5 @@
+"use client";
+
 import {Camera, Circle} from "lucide-react";
 import {type Ref, useRef, useState} from "react";
 import {Button} from "@heroui/react";
