@@ -1,5 +1,11 @@
-import {CapturePhotoButton} from "@/components/CapturePhotoButton";
+import {CapturePhoto} from "@/components/CapturePhoto";
+import {FruitList} from "@/components/FruitList";
 
 export default function RootPage() {
-  return <CapturePhotoButton />;
+  return (
+    <>
+      <FruitList />
+      <CapturePhoto />
+    </>
+  );
 }

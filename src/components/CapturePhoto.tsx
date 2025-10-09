@@ -6,7 +6,7 @@ import {type Ref, useImperativeHandle, useRef, useState} from "react";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 
-export function CapturePhotoButton() {
+export function CapturePhoto() {
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const cameraRef = useRef<React.ComponentRef<typeof Camera>>(null);
   async function startCamera() {
@@ -49,6 +49,7 @@ export function CapturePhotoButton() {
         size="lg"
         radius="none"
         endContent={<CameraIcon />}
+        className={cn("fixed start-0 bottom-0 z-10")}
         disableAnimation
         fullWidth
         onPress={startCamera}>
@@ -96,7 +97,7 @@ function Camera({ref, hidden, onClose}: CameraProps) {
   }
   return (
     <div
-      className={cn("absolute inset-0", {
+      className={cn("fixed inset-0 z-20", {
         hidden,
       })}>
       <video
