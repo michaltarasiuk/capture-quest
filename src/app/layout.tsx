@@ -3,7 +3,7 @@
 import "./globals.css";
 
 import {Geist, Geist_Mono} from "next/font/google";
-import {HeroUIProvider} from "@heroui/react";
+import {HeroUIProvider, ToastProvider} from "@heroui/react";
 import {cn} from "@/lib/cn";
 
 const geistSans = Geist({
@@ -24,7 +24,10 @@ export default function RootLayout({children}: LayoutProps<"/">) {
           `${geistSans.variable} ${geistMono.variable} antialiased`,
           "min-h-[100dvh]",
         )}>
-        <HeroUIProvider>{children}</HeroUIProvider>
+        <HeroUIProvider>
+          {children}
+          <ToastProvider />
+        </HeroUIProvider>
       </body>
     </html>
   );

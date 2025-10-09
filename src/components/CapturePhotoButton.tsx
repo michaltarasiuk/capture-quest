@@ -1,8 +1,8 @@
 "use client";
 
+import {Button, addToast} from "@heroui/react";
 import {Camera as CameraIcon, Circle as CircleIcon} from "lucide-react";
 import {type Ref, useImperativeHandle, useRef, useState} from "react";
-import {Button} from "@heroui/react";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 
@@ -10,13 +10,30 @@ export function CapturePhotoButton() {
   const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
   const cameraRef = useRef<React.ComponentRef<typeof Camera>>(null);
   async function startCamera() {
-    if (isDefined(cameraRef.current)) {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-        audio: false,
-      });
-      cameraRef.current.srcObject = stream;
-      setMediaStream(stream);
+    try {
+      if (isDefined(cameraRef.current)) {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: true,
+          audio: false,
+        });
+        cameraRef.current.srcObject = stream;
+        setMediaStream(stream);
+      }
+    } catch (error) {
+      const errorName = error instanceof Error ? error.name : "UnknownError";
+      switch (errorName) {
+        case "NotAllowedError":
+          addToast({
+            title: "Not Allowed",
+            color: "danger",
+          });
+          break;
+        default:
+          addToast({
+            title: "Unknown Error",
+            color: "danger",
+          });
+      }
     }
   }
   function stopCamera() {
