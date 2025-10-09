@@ -2,10 +2,10 @@
  * @see https://prettier.io/docs/configuration
  * @type {import("prettier").Config}
  */
-const config = {
+const prettierConfig = {
   bracketSameLine: true,
   bracketSpacing: false,
   tailwindFunctions: ["cn"],
   plugins: ["prettier-plugin-tailwindcss"],
 };
-export default config;
+export default prettierConfig;
