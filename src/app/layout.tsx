@@ -23,7 +23,7 @@ export default function RootLayout({children}: LayoutProps<"/">) {
         className={cn(
           `${geistSans.variable} ${geistMono.variable} antialiased`,
         )}>
-        <HeroUIProvider className={cn("container mx-auto")}>
+        <HeroUIProvider className={cn("container mx-auto p-2")}>
           {children}
           <ToastProvider />
         </HeroUIProvider>
