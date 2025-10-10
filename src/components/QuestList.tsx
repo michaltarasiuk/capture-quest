@@ -1,0 +1,47 @@
+"use client";
+
+import {Card, CardBody} from "@heroui/react";
+import {DifficultyChip} from "./DifficultyChip";
+import {Quests} from "@/lib/quests";
+import {cn} from "@/lib/cn";
+import {useIsMobile} from "@/hooks/use-is-mobile";
+import {useRouter} from "next/navigation";
+import {useSearchId} from "@/hooks/use-search-id";
+
+export function QuestList() {
+  const router = useRouter();
+  const searchId = useSearchId();
+  const isMobile = useIsMobile();
+  function selectQuest(id: number) {
+    router.push(`?id=${id}`, {
+      scroll: isMobile,
+    });
+  }
+  return (
+    <div className={cn("space-y-3 lg:col-span-2")}>
+      {Quests.map((q) => (
+        <Card
+          key={q.id}
+          className={cn({
+            "ring-2 ring-blue-500": String(q.id) === searchId,
+          })}
+          fullWidth
+          isPressable
+          onPress={() => selectQuest(q.id)}>
+          <CardBody className={cn("flex flex-row")}>
+            <div className={cn("flex-1")}>
+              <h3 className={cn("font-semibold")}>{q.title}</h3>
+              <p className={cn("text-sm text-gray-600")}>{q.description}</p>
+            </div>
+            <div className={cn("flex gap-1.5")}>
+              <DifficultyChip difficulty={q.difficulty} />
+              <span className={cn("font-semibold text-orange-500")}>
+                +{q.points}
+              </span>
+            </div>
+          </CardBody>
+        </Card>
+      ))}
+    </div>
+  );
+}

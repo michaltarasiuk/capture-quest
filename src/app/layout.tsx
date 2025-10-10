@@ -16,14 +16,15 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export default function RootLayout({children}: LayoutProps<"/">) {
+export default function Layout({children}: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body
         className={cn(
-          `${geistSans.variable} ${geistMono.variable} antialiased`,
+          "min-h-screen bg-gradient-to-br from-blue-50 to-purple-50",
+          `${geistSans.variable} ${geistMono.variable} text-gray-900 antialiased`,
         )}>
-        <HeroUIProvider className={cn("container mx-auto p-2")}>
+        <HeroUIProvider className={cn("container mx-auto px-3 py-6")}>
           {children}
           <ToastProvider />
         </HeroUIProvider>

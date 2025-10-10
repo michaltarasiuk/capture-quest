@@ -47,9 +47,7 @@ export function CapturePhoto() {
       <Button
         color="primary"
         size="lg"
-        radius="none"
-        endContent={<CameraIcon />}
-        disableAnimation
+        startContent={<CameraIcon />}
         fullWidth
         onPress={startCamera}>
         Capture photo
@@ -96,7 +94,7 @@ function Camera({ref, hidden, onClose}: CameraProps) {
   }
   return (
     <div
-      className={cn("fixed inset-0 z-20", {
+      className={cn("fixed inset-0 z-50", {
         hidden,
       })}>
       <video
