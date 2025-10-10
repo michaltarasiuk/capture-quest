@@ -49,7 +49,6 @@ export function CapturePhoto() {
         size="lg"
         radius="none"
         endContent={<CameraIcon />}
-        className={cn("fixed start-0 bottom-0 z-10")}
         disableAnimation
         fullWidth
         onPress={startCamera}>
