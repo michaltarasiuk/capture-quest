@@ -1,29 +1,27 @@
-import {Chip} from "@heroui/react";
+import {Chip, ChipProps} from "@heroui/react";
 import {assertNever} from "@/lib/assert-never";
+import {capitalize} from "@/lib/capitalize";
 
 type Difficulty = "easy" | "medium" | "hard";
 
 export function DifficultyChip({difficulty}: {difficulty: Difficulty}) {
+  let color: ChipProps["color"];
   switch (difficulty) {
     case "easy":
-      return (
-        <Chip variant="flat" color="success" size="sm">
-          Easy
-        </Chip>
-      );
+      color = "success";
+      break;
     case "medium":
-      return (
-        <Chip variant="flat" color="warning" size="sm">
-          Medium
-        </Chip>
-      );
+      color = "warning";
+      break;
     case "hard":
-      return (
-        <Chip variant="flat" color="danger" size="sm">
-          Hard
-        </Chip>
-      );
+      color = "danger";
+      break;
     default:
       assertNever(difficulty);
   }
+  return (
+    <Chip variant="flat" color={color} size="sm">
+      {capitalize(difficulty)}
+    </Chip>
+  );
 }

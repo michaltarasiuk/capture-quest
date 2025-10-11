@@ -7,7 +7,7 @@ import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 
 export function CapturePhoto() {
-  const [mediaStream, setMediaStream] = useState<MediaStream | null>(null);
+  const [stream, setStream] = useState<MediaStream | null>(null);
   const cameraRef = useRef<React.ComponentRef<typeof Camera>>(null);
   async function startCamera() {
     try {
@@ -17,7 +17,7 @@ export function CapturePhoto() {
           audio: false,
         });
         cameraRef.current.srcObject = stream;
-        setMediaStream(stream);
+        setStream(stream);
       }
     } catch (error) {
       const errorName = error instanceof Error ? error.name : "UnknownError";
@@ -37,9 +37,9 @@ export function CapturePhoto() {
     }
   }
   function stopCamera() {
-    if (isDefined(mediaStream)) {
-      mediaStream.getTracks().forEach((track) => track.stop());
-      setMediaStream(null);
+    if (isDefined(stream)) {
+      stream.getTracks().forEach((track) => track.stop());
+      setStream(null);
     }
   }
   return (
@@ -54,7 +54,7 @@ export function CapturePhoto() {
       </Button>
       <Camera
         ref={cameraRef}
-        hidden={!isDefined(mediaStream)}
+        hidden={!isDefined(stream)}
         onClose={stopCamera}
       />
     </>

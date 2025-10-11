@@ -10,29 +10,27 @@ import {useSearchId} from "@/hooks/use-search-id";
 
 export function QuestDetails() {
   const searchId = useSearchId();
-  const selectedQuest = Quests.find((q) => String(q.id) === searchId);
-  if (!isDefined(selectedQuest)) {
+  const quest = Quests.find((q) => String(q.id) === searchId);
+  if (!isDefined(quest)) {
     return null;
   }
   return (
-    <div className={cn("order-first md:order-none")}>
+    <div className={cn("order-first lg:order-none")}>
       <Card className={cn("sticky top-3")}>
         <CardHeader className={cn("flex justify-between")}>
           <h2 className={cn("text-lg font-semibold uppercase")}>
-            {selectedQuest.title}
+            {quest.title}
           </h2>
-          <DifficultyChip difficulty={selectedQuest.difficulty} />
+          <DifficultyChip difficulty={quest.difficulty} />
         </CardHeader>
         <CardBody className={cn("space-y-3")}>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Description</h3>
-            <p className={cn("text-sm text-gray-600")}>
-              {selectedQuest.description}
-            </p>
+            <p className={cn("text-sm text-gray-600")}>{quest.description}</p>
           </div>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Hint</h3>
-            <p className={cn("text-sm text-gray-600")}>{selectedQuest.hint}</p>
+            <p className={cn("text-sm text-gray-600")}>{quest.hint}</p>
           </div>
         </CardBody>
         <CardFooter>
