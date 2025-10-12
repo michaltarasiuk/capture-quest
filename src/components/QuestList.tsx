@@ -6,7 +6,7 @@ import {useRouter} from "next/navigation";
 import {useIsMobile} from "@/hooks/use-is-mobile";
 import {useSearchId} from "@/hooks/use-search-id";
 import {cn} from "@/lib/cn";
-import {Quests} from "@/lib/quests";
+import quests from "@/quests";
 
 import {DifficultyChip} from "./DifficultyChip";
 
@@ -21,7 +21,7 @@ export function QuestList() {
   }
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
-      {Quests.map((q) => (
+      {quests.map((q) => (
         <Card
           key={q.id}
           className={cn({
@@ -51,7 +51,7 @@ export function QuestList() {
 export function SkeletonQuestList() {
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
-      {Array.from({length: Quests.length}, (_, i) => (
+      {Array.from({length: quests.length}, (_, i) => (
         <Skeleton key={i} className={cn("h-22 rounded-2xl md:h-17")} />
       ))}
     </div>
