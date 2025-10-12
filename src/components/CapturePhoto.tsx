@@ -101,7 +101,7 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
       <video
         ref={videoRef}
         className={cn("size-full object-cover", {
-          "opacity-0": !isVideoLoaded,
+          hidden: !isVideoLoaded,
         })}
         autoPlay
         playsInline
