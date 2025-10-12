@@ -1,6 +1,6 @@
 "use client";
 
-import {Card, CardBody} from "@heroui/react";
+import {Card, CardBody, Skeleton} from "@heroui/react";
 
 import {cn} from "@/lib/cn";
 
@@ -27,5 +27,15 @@ export function Stats() {
         </CardBody>
       </Card>
     </section>
+  );
+}
+
+export function SkeletonStats() {
+  return (
+    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3")}>
+      <Skeleton className={cn("h-22 rounded-2xl")} />
+      <Skeleton className={cn("h-22 rounded-2xl")} />
+      <Skeleton className={cn("h-22 rounded-2xl")} />
+    </div>
   );
 }

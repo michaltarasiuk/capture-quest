@@ -96,7 +96,7 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
     }
   }
   return (
-    <div className={cn("fixed inset-0 z-50 bg-black")}>
+    <div className={cn("fixed inset-0 z-50")}>
       {!isVideoLoaded && <Skeleton className={cn("absolute inset-0")} />}
       <video
         ref={videoRef}

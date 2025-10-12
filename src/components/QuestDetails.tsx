@@ -1,6 +1,6 @@
 "use client";
 
-import {Card, CardBody, CardFooter, CardHeader} from "@heroui/react";
+import {Card, CardBody, CardFooter, CardHeader, Skeleton} from "@heroui/react";
 
 import {useSearchId} from "@/hooks/use-search-id";
 import {cn} from "@/lib/cn";
@@ -40,5 +40,11 @@ export function QuestDetails() {
         </CardFooter>
       </Card>
     </div>
+  );
+}
+
+export function SkeletonQuestDetails() {
+  return (
+    <Skeleton className={cn("order-first h-72 rounded-2xl lg:order-none")} />
   );
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import {Card, CardBody} from "@heroui/react";
+import {Card, CardBody, Skeleton} from "@heroui/react";
 import {useRouter} from "next/navigation";
 
 import {useIsMobile} from "@/hooks/use-is-mobile";
@@ -43,6 +43,16 @@ export function QuestList() {
             </div>
           </CardBody>
         </Card>
+      ))}
+    </div>
+  );
+}
+
+export function SkeletonQuestList() {
+  return (
+    <div className={cn("space-y-3 lg:col-span-2")}>
+      {Array.from({length: Quests.length}, (_, i) => (
+        <Skeleton key={i} className={cn("h-22 rounded-2xl md:h-17")} />
       ))}
     </div>
   );
