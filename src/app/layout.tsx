@@ -2,8 +2,9 @@
 
 import "./globals.css";
 
-import {Geist, Geist_Mono} from "next/font/google";
 import {HeroUIProvider, ToastProvider} from "@heroui/react";
+import {Geist, Geist_Mono} from "next/font/google";
+
 import {cn} from "@/lib/cn";
 
 const geistSans = Geist({

@@ -1,12 +1,14 @@
 "use client";
 
 import {Card, CardBody} from "@heroui/react";
-import {DifficultyChip} from "./DifficultyChip";
-import {Quests} from "@/lib/quests";
-import {cn} from "@/lib/cn";
-import {useIsMobile} from "@/hooks/use-is-mobile";
 import {useRouter} from "next/navigation";
+
+import {useIsMobile} from "@/hooks/use-is-mobile";
 import {useSearchId} from "@/hooks/use-search-id";
+import {cn} from "@/lib/cn";
+import {Quests} from "@/lib/quests";
+
+import {DifficultyChip} from "./DifficultyChip";
 
 export function QuestList() {
   const router = useRouter();
@@ -33,7 +35,7 @@ export function QuestList() {
               <h3 className={cn("font-semibold")}>{q.title}</h3>
               <p className={cn("text-sm text-gray-600")}>{q.description}</p>
             </div>
-            <div className={cn("flex gap-1.5")}>
+            <div className={cn("flex gap-2")}>
               <DifficultyChip difficulty={q.difficulty} />
               <span className={cn("font-semibold text-orange-500")}>
                 +{q.points}

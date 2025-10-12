@@ -1,12 +1,14 @@
 "use client";
 
 import {Card, CardBody, CardFooter, CardHeader} from "@heroui/react";
-import {CapturePhoto} from "./CapturePhoto";
-import {DifficultyChip} from "./DifficultyChip";
-import {Quests} from "@/lib/quests";
+
+import {useSearchId} from "@/hooks/use-search-id";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
-import {useSearchId} from "@/hooks/use-search-id";
+import {Quests} from "@/lib/quests";
+
+import {CapturePhoto} from "./CapturePhoto";
+import {DifficultyChip} from "./DifficultyChip";
 
 export function QuestDetails() {
   const searchId = useSearchId();
@@ -34,7 +36,7 @@ export function QuestDetails() {
           </div>
         </CardBody>
         <CardFooter>
-          <CapturePhoto />
+          <CapturePhoto questId={quest.id} />
         </CardFooter>
       </Card>
     </div>

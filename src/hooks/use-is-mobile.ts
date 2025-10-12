@@ -1,5 +1,5 @@
-import {useMatchMedia} from "./use-match-media";
+import {useMediaQuery} from "usehooks-ts";
 
 export function useIsMobile() {
-  return useMatchMedia("(max-width: 64rem)");
+  return useMediaQuery("(max-width: 64rem)");
 }

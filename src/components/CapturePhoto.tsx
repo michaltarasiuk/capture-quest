@@ -1,24 +1,23 @@
 "use client";
 
-import {Button, addToast} from "@heroui/react";
+import {addToast, Button, Skeleton} from "@heroui/react";
 import {Camera as CameraIcon, Circle as CircleIcon} from "lucide-react";
-import {type Ref, useImperativeHandle, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
+import {useScrollLock} from "usehooks-ts";
+
+import {useEscapeDown} from "@/hooks/use-escape-down";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
+import {matchQuestPhoto} from "@/lib/match-quest-photo";
 
-export function CapturePhoto() {
+export function CapturePhoto({questId}: {questId: number}) {
   const [stream, setStream] = useState<MediaStream | null>(null);
-  const cameraRef = useRef<React.ComponentRef<typeof Camera>>(null);
   async function startCamera() {
     try {
-      if (isDefined(cameraRef.current)) {
-        const stream = await navigator.mediaDevices.getUserMedia({
-          video: true,
-          audio: false,
-        });
-        cameraRef.current.srcObject = stream;
-        setStream(stream);
-      }
+      const stream = await navigator.mediaDevices.getUserMedia({
+        video: true,
+      });
+      setStream(stream);
     } catch (error) {
       const errorName = error instanceof Error ? error.name : "UnknownError";
       switch (errorName) {
@@ -52,31 +51,37 @@ export function CapturePhoto() {
         onPress={startCamera}>
         Capture photo
       </Button>
-      <Camera
-        ref={cameraRef}
-        hidden={!isDefined(stream)}
-        onClose={stopCamera}
-      />
+      {isDefined(stream) && (
+        <Camera
+          stream={stream}
+          onCapture={() => {
+            stopCamera();
+            matchQuestPhoto(questId);
+          }}
+          onClose={stopCamera}
+        />
+      )}
     </>
   );
 }
 
 interface CameraProps {
-  ref: Ref<{srcObject: MediaStream}>;
-  hidden: boolean;
+  stream: MediaStream;
+  onCapture: () => void;
   onClose: () => void;
 }
 
-function Camera({ref, hidden, onClose}: CameraProps) {
+function Camera({stream, onCapture, onClose}: CameraProps) {
+  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
   const videoRef = useRef<React.ComponentRef<"video">>(null);
   const canvasRef = useRef<React.ComponentRef<"canvas">>(null);
-  useImperativeHandle(ref, () => ({
-    set srcObject(stream: MediaStream) {
-      if (isDefined(videoRef.current)) {
-        videoRef.current.srcObject = stream;
-      }
-    },
-  }));
+  useEffect(() => {
+    if (isDefined(videoRef.current)) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+  useScrollLock();
+  useEscapeDown(onClose);
   async function capturePhoto() {
     if (isDefined(videoRef.current) && isDefined(canvasRef.current)) {
       const video = videoRef.current;
@@ -86,22 +91,21 @@ function Camera({ref, hidden, onClose}: CameraProps) {
       const context = canvas.getContext("2d");
       if (isDefined(context)) {
         context.drawImage(video, 0, 0);
-        const dataUrl = canvas.toDataURL("image/png");
-        await navigator.clipboard.writeText(dataUrl);
-        onClose();
+        onCapture();
       }
     }
   }
   return (
-    <div
-      className={cn("fixed inset-0 z-50", {
-        hidden,
-      })}>
+    <div className={cn("fixed inset-0 z-50 bg-black")}>
+      {!isVideoLoaded && <Skeleton className={cn("absolute inset-0")} />}
       <video
         ref={videoRef}
-        className={cn("size-full object-cover")}
+        className={cn("size-full object-cover", {
+          "opacity-0": !isVideoLoaded,
+        })}
         autoPlay
         playsInline
+        onLoadedData={() => setIsVideoLoaded(true)}
       />
       <canvas ref={canvasRef} className={cn("hidden")} />
       <Button
@@ -109,6 +113,7 @@ function Camera({ref, hidden, onClose}: CameraProps) {
         size="lg"
         radius="full"
         className={cn("absolute start-1/2 bottom-10 -translate-x-1/2")}
+        isDisabled={!isVideoLoaded}
         isIconOnly
         onPress={capturePhoto}>
         <CircleIcon className={cn("size-10")} />
