@@ -2,6 +2,7 @@
 
 import {Card, CardBody, Skeleton} from "@heroui/react";
 import {useAtomValue} from "jotai";
+import {Award} from "lucide-react";
 import {useRouter} from "next/navigation";
 
 import {useIsMobile} from "@/hooks/use-is-mobile";
@@ -27,30 +28,40 @@ export function QuestList() {
   }
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
-      {quests.map((q) => (
-        <Card
-          key={q.id}
-          className={cn({
-            "ring-2 ring-blue-500": q.id === questId,
-          })}
-          isPressable={!isCompleted(q.id)}
-          isDisabled={isCompleted(q.id)}
-          fullWidth
-          onPress={() => selectQuest(q.id)}>
-          <CardBody className={cn("flex flex-row")}>
-            <div className={cn("flex-1")}>
-              <h3 className={cn("font-semibold")}>{q.title}</h3>
-              <p className={cn("text-sm text-gray-600")}>{q.description}</p>
-            </div>
-            <div className={cn("flex gap-2")}>
-              <DifficultyChip difficulty={q.difficulty} />
-              <span className={cn("font-semibold text-orange-500")}>
-                +{q.points}
-              </span>
-            </div>
-          </CardBody>
-        </Card>
-      ))}
+      {quests
+        .map((q) => ({
+          ...q,
+          completed: isCompleted(q.id),
+        }))
+        .map((q) => (
+          <Card
+            key={q.id}
+            className={cn({
+              "ring-2 ring-blue-500": q.id === questId,
+            })}
+            isPressable={!q.completed}
+            isDisabled={q.completed}
+            fullWidth
+            onPress={() => selectQuest(q.id)}>
+            <CardBody className={cn("flex flex-row")}>
+              <div className={cn("flex-1")}>
+                <h3 className={cn("flex items-center gap-1 font-semibold")}>
+                  {q.title}
+                  {q.completed && (
+                    <Award className={cn("size-5 stroke-green-600")} />
+                  )}
+                </h3>
+                <p className={cn("text-sm text-gray-600")}>{q.description}</p>
+              </div>
+              <div className={cn("flex gap-2")}>
+                <DifficultyChip difficulty={q.difficulty} />
+                <span className={cn("font-semibold text-orange-500")}>
+                  +{q.points}
+                </span>
+              </div>
+            </CardBody>
+          </Card>
+        ))}
     </div>
   );
 }
