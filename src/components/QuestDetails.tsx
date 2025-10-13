@@ -2,7 +2,7 @@
 
 import {Card, CardBody, CardFooter, CardHeader, Skeleton} from "@heroui/react";
 
-import {useSearchId} from "@/hooks/use-search-id";
+import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 import quests from "@/quests";
@@ -11,8 +11,8 @@ import {CapturePhoto} from "./CapturePhoto";
 import {DifficultyChip} from "./DifficultyChip";
 
 export function QuestDetails() {
-  const searchId = useSearchId();
-  const quest = quests.find((q) => String(q.id) === searchId);
+  const questId = useQuestId();
+  const quest = quests.find((q) => q.id === questId);
   if (!isDefined(quest)) {
     return null;
   }
