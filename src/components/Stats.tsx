@@ -7,13 +7,13 @@ import {cn} from "@/lib/cn";
 import {formatPercentage} from "@/lib/percentage";
 import {
   completedQuestsCountAtom,
-  completedQuestsPercentAtom,
+  completedQuestsPercentageAtom,
   completedQuestsPointsAtom,
 } from "@/lib/storage";
 
 export function Stats() {
   const count = useAtomValue(completedQuestsCountAtom);
-  const percent = useAtomValue(completedQuestsPercentAtom);
+  const percentage = useAtomValue(completedQuestsPercentageAtom);
   const points = useAtomValue(completedQuestsPointsAtom);
   return (
     <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3")}>
@@ -32,7 +32,7 @@ export function Stats() {
       <Card>
         <CardBody className={cn("space-y-2")}>
           <h2 className={cn("text-3xl font-bold text-purple-600")}>
-            {formatPercentage(percent)}
+            {formatPercentage(percentage)}
           </h2>
           <p className={cn("text-sm text-gray-600")}>Progress</p>
         </CardBody>

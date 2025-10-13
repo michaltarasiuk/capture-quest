@@ -9,11 +9,7 @@ import {useEscapeDown} from "@/hooks/use-escape-down";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 
-interface CapturePhotoProps {
-  onCapture: (image: string) => void;
-}
-
-export function CapturePhoto({onCapture}: CapturePhotoProps) {
+export function CapturePhoto({onCapture}: {onCapture: () => void}) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   async function startCamera() {
     try {
@@ -57,9 +53,9 @@ export function CapturePhoto({onCapture}: CapturePhotoProps) {
       {isDefined(stream) && (
         <Camera
           stream={stream}
-          onCapture={(image) => {
+          onCapture={() => {
             stopCamera();
-            onCapture(image);
+            onCapture();
           }}
           onClose={stopCamera}
         />
@@ -70,7 +66,7 @@ export function CapturePhoto({onCapture}: CapturePhotoProps) {
 
 interface CameraProps {
   stream: MediaStream;
-  onCapture: (image: string) => void;
+  onCapture: () => void;
   onClose: () => void;
 }
 
@@ -94,8 +90,7 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
       const context = canvas.getContext("2d");
       if (isDefined(context)) {
         context.drawImage(video, 0, 0);
-        const image = canvas.toDataURL();
-        onCapture(image);
+        onCapture();
       }
     }
   }

@@ -48,11 +48,8 @@ export function QuestDetails() {
         </CardBody>
         <CardFooter>
           <CapturePhoto
-            onCapture={async (image) => {
-              const {matches, reason, hint} = await matchQuestPhoto(
-                quest.id,
-                image,
-              );
+            onCapture={async () => {
+              const {matches, reason, hint} = await matchQuestPhoto(quest.id);
               if (matches) {
                 setCompletedQuests((completedQuests) => [
                   ...completedQuests,

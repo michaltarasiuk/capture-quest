@@ -17,7 +17,7 @@ export const completedQuestsCountAtom = atom((get) => {
   return completed.length;
 });
 
-export const completedQuestsPercentAtom = atom((get) => {
+export const completedQuestsPercentageAtom = atom((get) => {
   const count = get(completedQuestsCountAtom);
   return percentage(count, quests.length);
 });
