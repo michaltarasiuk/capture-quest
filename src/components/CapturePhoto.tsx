@@ -1,45 +1,17 @@
 "use client";
 
-import {addToast, Button, Skeleton} from "@heroui/react";
+import {Button, Skeleton} from "@heroui/react";
 import {Camera as CameraIcon, Circle as CircleIcon} from "lucide-react";
 import {useEffect, useRef, useState} from "react";
 import {useScrollLock} from "usehooks-ts";
 
 import {useEscapeDown} from "@/hooks/use-escape-down";
+import {useVideoStream} from "@/hooks/use-video-stream";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 
 export function CapturePhoto({onCapture}: {onCapture: () => void}) {
-  const [stream, setStream] = useState<MediaStream | null>(null);
-  async function startCamera() {
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
-      });
-      setStream(stream);
-    } catch (error) {
-      const errorName = error instanceof Error ? error.name : "UnknownError";
-      switch (errorName) {
-        case "NotAllowedError":
-          addToast({
-            title: "Not Allowed",
-            color: "danger",
-          });
-          break;
-        default:
-          addToast({
-            title: "Unknown Error",
-            color: "danger",
-          });
-      }
-    }
-  }
-  function stopCamera() {
-    if (isDefined(stream)) {
-      stream.getTracks().forEach((track) => track.stop());
-      setStream(null);
-    }
-  }
+  const {stream, startStream, stopStream} = useVideoStream();
   return (
     <>
       <Button
@@ -47,17 +19,17 @@ export function CapturePhoto({onCapture}: {onCapture: () => void}) {
         size="lg"
         startContent={<CameraIcon />}
         fullWidth
-        onPress={startCamera}>
+        onPress={startStream}>
         Capture photo
       </Button>
       {isDefined(stream) && (
         <Camera
           stream={stream}
           onCapture={() => {
-            stopCamera();
+            stopStream();
             onCapture();
           }}
-          onClose={stopCamera}
+          onClose={stopStream}
         />
       )}
     </>
