@@ -8,9 +8,12 @@ import {useScrollLock} from "usehooks-ts";
 import {useEscapeDown} from "@/hooks/use-escape-down";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
-import {matchQuestPhoto} from "@/lib/match-quest-photo";
 
-export function CapturePhoto({questId}: {questId: number}) {
+interface CapturePhotoProps {
+  onCapture: (image: string) => void;
+}
+
+export function CapturePhoto({onCapture}: CapturePhotoProps) {
   const [stream, setStream] = useState<MediaStream | null>(null);
   async function startCamera() {
     try {
@@ -54,9 +57,9 @@ export function CapturePhoto({questId}: {questId: number}) {
       {isDefined(stream) && (
         <Camera
           stream={stream}
-          onCapture={() => {
+          onCapture={(image) => {
             stopCamera();
-            matchQuestPhoto(questId);
+            onCapture(image);
           }}
           onClose={stopCamera}
         />
@@ -67,7 +70,7 @@ export function CapturePhoto({questId}: {questId: number}) {
 
 interface CameraProps {
   stream: MediaStream;
-  onCapture: () => void;
+  onCapture: (image: string) => void;
   onClose: () => void;
 }
 
@@ -91,7 +94,8 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
       const context = canvas.getContext("2d");
       if (isDefined(context)) {
         context.drawImage(video, 0, 0);
-        onCapture();
+        const image = canvas.toDataURL();
+        onCapture(image);
       }
     }
   }

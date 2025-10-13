@@ -1,10 +1,20 @@
 "use client";
 
-import {Card, CardBody, CardFooter, CardHeader, Skeleton} from "@heroui/react";
+import {
+  addToast,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Skeleton,
+} from "@heroui/react";
+import {useSetAtom} from "jotai";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
+import {matchQuestPhoto} from "@/lib/match-quest-photo";
+import {completedQuestsAtom} from "@/lib/storage";
 import quests from "@/quests";
 
 import {CapturePhoto} from "./CapturePhoto";
@@ -12,6 +22,7 @@ import {DifficultyChip} from "./DifficultyChip";
 
 export function QuestDetails() {
   const questId = useQuestId();
+  const setCompletedQuests = useSetAtom(completedQuestsAtom);
   const quest = quests.find((q) => q.id === questId);
   if (!isDefined(quest)) {
     return null;
@@ -36,7 +47,30 @@ export function QuestDetails() {
           </div>
         </CardBody>
         <CardFooter>
-          <CapturePhoto questId={quest.id} />
+          <CapturePhoto
+            onCapture={async (image) => {
+              const {matches, reason, hint} = await matchQuestPhoto(
+                quest.id,
+                image,
+              );
+              if (matches) {
+                setCompletedQuests((completedQuests) => [
+                  ...completedQuests,
+                  quest.id,
+                ]);
+                addToast({
+                  title: "Quest completed",
+                  color: "success",
+                });
+              } else {
+                addToast({
+                  title: "Photo did not match",
+                  description: reason + " " + hint,
+                  color: "danger",
+                });
+              }
+            }}
+          />
         </CardFooter>
       </Card>
     </div>
