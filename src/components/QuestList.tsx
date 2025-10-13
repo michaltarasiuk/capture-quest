@@ -3,10 +3,9 @@
 import {Card, CardBody, Skeleton} from "@heroui/react";
 import {useAtomValue} from "jotai";
 import {Award} from "lucide-react";
-import {useRouter} from "next/navigation";
 
-import {useIsMobile} from "@/hooks/use-is-mobile";
 import {useQuestId} from "@/hooks/use-quest-id";
+import {useQuestNavigation} from "@/hooks/use-quest-navigation";
 import {cn} from "@/lib/cn";
 import {completedQuestsAtom} from "@/lib/storage";
 import quests from "@/quests";
@@ -14,17 +13,11 @@ import quests from "@/quests";
 import {DifficultyChip} from "./DifficultyChip";
 
 export function QuestList() {
-  const router = useRouter();
   const questId = useQuestId();
   const completedQuests = useAtomValue(completedQuestsAtom);
-  const isMobile = useIsMobile();
+  const navigateToQuest = useQuestNavigation();
   function isCompleted(id: number) {
     return completedQuests.includes(id);
-  }
-  function selectQuest(id: number) {
-    router.push(`?id=${id}`, {
-      scroll: isMobile,
-    });
   }
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
@@ -42,7 +35,7 @@ export function QuestList() {
             isPressable={!q.completed}
             isDisabled={q.completed}
             fullWidth
-            onPress={() => selectQuest(q.id)}>
+            onPress={() => navigateToQuest(q.id)}>
             <CardBody className={cn("flex flex-row")}>
               <div className={cn("flex-1")}>
                 <h3 className={cn("flex items-center gap-1 font-semibold")}>
