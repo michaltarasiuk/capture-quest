@@ -16,15 +16,12 @@ export function QuestList() {
   const questId = useQuestId();
   const completedQuests = useAtomValue(completedQuestsAtom);
   const navigateToQuest = useQuestNavigation();
-  function isCompleted(id: number) {
-    return completedQuests.includes(id);
-  }
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
       {quests
         .map((q) => ({
           ...q,
-          completed: isCompleted(q.id),
+          completed: completedQuests.includes(q.id),
         }))
         .map((q) => (
           <Card

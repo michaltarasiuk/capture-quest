@@ -8,7 +8,7 @@ export function useQuestNavigation() {
   function navigateToQuest(id: number) {
     const newSearchParams = new URLSearchParams(searchParams);
     newSearchParams.set("id", String(id));
-    window.history.pushState(null, "", `?${newSearchParams}`);
+    window.history.pushState(null, "", "?" + newSearchParams);
     if (isMobile) {
       window.scrollTo(0, 0);
     }
