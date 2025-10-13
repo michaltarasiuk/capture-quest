@@ -8,6 +8,8 @@ import {percentage} from "./percentage";
 export const completedQuestsAtom = atomWithStorage<number[]>(
   "completed_quests",
   [],
+  undefined,
+  {getOnInit: true},
 );
 
 export const completedQuestsCountAtom = atom((get) => {
