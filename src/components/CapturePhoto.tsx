@@ -43,9 +43,8 @@ interface CameraProps {
 }
 
 function Camera({stream, onCapture, onClose}: CameraProps) {
-  const [isVideoLoaded, setIsVideoLoaded] = useState(false);
-  const videoRef = useRef<React.ComponentRef<"video">>(null);
-  const canvasRef = useRef<React.ComponentRef<"canvas">>(null);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const canvasRef = useRef<HTMLCanvasElement>(null);
   useEffect(() => {
     if (isDefined(videoRef.current)) {
       videoRef.current.srcObject = stream;
@@ -68,27 +67,35 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
   }
   return (
     <div className={cn("fixed inset-0 z-50")}>
-      {!isVideoLoaded && <Skeleton className={cn("absolute inset-0")} />}
-      <video
-        ref={videoRef}
-        className={cn("size-full object-cover", {
-          hidden: !isVideoLoaded,
-        })}
-        autoPlay
-        playsInline
-        onLoadedData={() => setIsVideoLoaded(true)}
-      />
+      <Video ref={videoRef} />
       <canvas ref={canvasRef} className={cn("hidden")} />
       <Button
         variant="flat"
         size="lg"
         radius="full"
         className={cn("absolute start-1/2 bottom-10 -translate-x-1/2")}
-        isDisabled={!isVideoLoaded}
         isIconOnly
         onPress={capturePhoto}>
         <CircleIcon className={cn("size-10")} />
       </Button>
     </div>
+  );
+}
+
+function Video({ref}: {ref: React.Ref<HTMLVideoElement>}) {
+  const [isLoaded, setIsLoaded] = useState(false);
+  return (
+    <>
+      {!isLoaded && <Skeleton className={cn("size-full")} />}
+      <video
+        ref={ref}
+        className={cn("size-full object-cover", {
+          hidden: !isLoaded,
+        })}
+        autoPlay
+        playsInline
+        onLoadedData={() => setIsLoaded(true)}
+      />
+    </>
   );
 }

@@ -14,18 +14,16 @@ const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
-const ObjectSchema = z.object({
-  matches: z.boolean(),
-  reason: z.string(),
-  hint: z.string(),
-});
-
 export async function matchQuestPhoto(questId: number) {
   const quest = quests.find((q) => q.id === questId);
   invariant(isDefined(quest), `Quest with id ${questId} not found`);
   const {object} = await generateObject({
     model: groq("openai/gpt-oss-20b"),
-    schema: ObjectSchema,
+    schema: z.object({
+      matches: z.boolean(),
+      reason: z.string(),
+      hint: z.string(),
+    }),
     messages: [
       {
         role: "user",
