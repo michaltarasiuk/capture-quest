@@ -3,6 +3,7 @@
 import "./globals.css";
 
 import {HeroUIProvider, ToastProvider} from "@heroui/react";
+import {Provider} from "jotai";
 import {Geist, Geist_Mono} from "next/font/google";
 
 import {cn} from "@/lib/cn";
@@ -26,7 +27,7 @@ export default function Layout({children}: LayoutProps<"/">) {
           `${geistSans.variable} ${geistMono.variable} text-gray-900 antialiased`,
         )}>
         <HeroUIProvider className={cn("container mx-auto px-3 py-6")}>
-          {children}
+          <Provider>{children}</Provider>
           <ToastProvider />
         </HeroUIProvider>
       </body>
