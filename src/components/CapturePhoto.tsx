@@ -1,7 +1,11 @@
 "use client";
 
 import {Button, Skeleton} from "@heroui/react";
-import {Camera as CameraIcon, Circle as CircleIcon} from "lucide-react";
+import {
+  Camera as CameraIcon,
+  Circle as CircleIcon,
+  X as XIcon,
+} from "lucide-react";
 import {useEffect, useRef, useState} from "react";
 import {useScrollLock} from "usehooks-ts";
 
@@ -69,6 +73,14 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
     <div className={cn("fixed inset-0 z-50")}>
       <Video ref={videoRef} />
       <canvas ref={canvasRef} className={cn("hidden")} />
+      <Button
+        variant="flat"
+        radius="full"
+        className={cn("absolute end-4 top-4")}
+        isIconOnly
+        onPress={onClose}>
+        <XIcon className={cn("size-6")} />
+      </Button>
       <Button
         variant="flat"
         size="lg"
