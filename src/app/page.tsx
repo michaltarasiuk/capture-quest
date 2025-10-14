@@ -20,7 +20,7 @@ const QuestContent = dynamic(
 export default function Page() {
   return (
     <div className={cn("space-y-6")}>
-      <h1 className={cn("text-4xl font-bold")}>Capture Photo</h1>
+      <h1 className={cn("text-3xl font-bold")}>Capture Photo</h1>
       <Suspense fallback={<SkeletonQuestContent />}>
         <QuestContent />
       </Suspense>

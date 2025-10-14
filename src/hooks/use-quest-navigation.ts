@@ -3,14 +3,14 @@ import {useSearchParams} from "next/navigation";
 import {useIsMobile} from "./use-is-mobile";
 
 export function useQuestNavigation() {
-  const searchParams = useSearchParams();
+  const params = useSearchParams();
   const isMobile = useIsMobile();
   function navigateToQuest(id: number) {
-    const newSearchParams = new URLSearchParams(searchParams);
-    newSearchParams.set("id", String(id));
-    window.history.pushState(null, "", "?" + newSearchParams);
+    const updatedParams = new URLSearchParams(params);
+    updatedParams.set("id", String(id));
+    window.history.pushState(null, "", "?" + updatedParams);
     if (isMobile) {
-      window.scrollTo(0, 0);
+      window.scroll({top: 0, behavior: "smooth"});
     }
   }
   return navigateToQuest;
