@@ -6,7 +6,7 @@ import {
   Circle as CircleIcon,
   X as XIcon,
 } from "lucide-react";
-import {useEffect, useRef, useState} from "react";
+import {useEffect, useRef, useState, useTransition} from "react";
 import {useScrollLock} from "usehooks-ts";
 
 import {useEscapeDown} from "@/hooks/use-escape-down";
@@ -16,12 +16,14 @@ import {isDefined} from "@/lib/is-defined";
 
 export function CapturePhoto({onCapture}: {onCapture: () => void}) {
   const {stream, startStream, stopStream} = useVideoStream();
+  const [isPending, startTransition] = useTransition();
   return (
     <>
       <Button
         color="primary"
         size="lg"
-        startContent={<CameraIcon />}
+        endContent={<CameraIcon />}
+        isDisabled={isPending}
         fullWidth
         onPress={startStream}>
         Capture photo
@@ -31,7 +33,7 @@ export function CapturePhoto({onCapture}: {onCapture: () => void}) {
           stream={stream}
           onCapture={() => {
             stopStream();
-            onCapture();
+            startTransition(onCapture);
           }}
           onClose={stopStream}
         />

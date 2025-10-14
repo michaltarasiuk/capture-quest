@@ -49,8 +49,8 @@ export function QuestDetails() {
         <CardFooter>
           <CapturePhoto
             onCapture={async () => {
-              const {matches, reason, hint} = await matchQuestPhoto(quest.id);
-              if (matches) {
+              const result = await matchQuestPhoto(quest.id);
+              if (result.matches) {
                 setCompletedQuests((completedQuests) => [
                   ...completedQuests,
                   quest.id,
@@ -60,6 +60,7 @@ export function QuestDetails() {
                   color: "success",
                 });
               } else {
+                const {reason, hint} = result;
                 addToast({
                   title: "Photo did not match",
                   description: reason + " " + hint,
