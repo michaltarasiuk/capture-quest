@@ -7,6 +7,7 @@ import {
   X as XIcon,
 } from "lucide-react";
 import {useEffect, useRef, useState, useTransition} from "react";
+import {createPortal} from "react-dom";
 import {useScrollLock} from "usehooks-ts";
 
 import {useEscapeDown} from "@/hooks/use-escape-down";
@@ -28,16 +29,18 @@ export function CapturePhoto({onCapture}: {onCapture: () => void}) {
         onPress={startStream}>
         Capture photo
       </Button>
-      {isDefined(stream) && (
-        <Camera
-          stream={stream}
-          onCapture={() => {
-            stopStream();
-            startTransition(onCapture);
-          }}
-          onClose={stopStream}
-        />
-      )}
+      {isDefined(stream) &&
+        createPortal(
+          <Camera
+            stream={stream}
+            onCapture={() => {
+              stopStream();
+              startTransition(onCapture);
+            }}
+            onClose={stopStream}
+          />,
+          document.body,
+        )}
     </>
   );
 }
@@ -72,7 +75,7 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
     }
   }
   return (
-    <div className={cn("fixed inset-0 z-50")}>
+    <div className={cn("fixed inset-0")}>
       <Video ref={videoRef} />
       <canvas ref={canvasRef} className={cn("hidden")} />
       <Button
