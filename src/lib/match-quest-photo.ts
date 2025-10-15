@@ -37,6 +37,11 @@ export async function matchQuestPhoto(questId: number) {
               Description: ${quest.description}
 
               Evaluate if the photo correctly completes this quest.
+              
+              Important:
+              - Keep "reason" brief (1-2 sentences max)
+              - Keep "hint" concise (1 short sentence or phrase)
+              - Both "reason" and "hint" MUST start with a capital letter and end with a period
             `,
           },
         ],
