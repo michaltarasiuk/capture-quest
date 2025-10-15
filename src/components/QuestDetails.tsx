@@ -8,7 +8,7 @@ import {
   CardHeader,
   Skeleton,
 } from "@heroui/react";
-import {useSetAtom} from "jotai";
+import {useAtom} from "jotai";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
@@ -22,7 +22,7 @@ import {DifficultyChip} from "./DifficultyChip";
 
 export function QuestDetails() {
   const questId = useQuestId();
-  const setCompletedQuests = useSetAtom(completedQuestsAtom);
+  const [completedQuests, setCompletedQuests] = useAtom(completedQuestsAtom);
   const quest = quests.find((q) => q.id === questId);
   if (!isDefined(quest)) {
     return null;
@@ -48,6 +48,7 @@ export function QuestDetails() {
         </CardBody>
         <CardFooter>
           <CapturePhoto
+            isDisabled={completedQuests.includes(quest.id)}
             onCapture={async () => {
               const result = await matchQuestPhoto(quest.id);
               if (result.matches) {

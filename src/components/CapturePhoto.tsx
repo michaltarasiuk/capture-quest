@@ -15,7 +15,12 @@ import {useVideoStream} from "@/hooks/use-video-stream";
 import {cn} from "@/lib/cn";
 import {isDefined} from "@/lib/is-defined";
 
-export function CapturePhoto({onCapture}: {onCapture: () => void}) {
+interface CapturePhotoProps {
+  isDisabled: boolean;
+  onCapture: () => void;
+}
+
+export function CapturePhoto({isDisabled, onCapture}: CapturePhotoProps) {
   const {stream, startStream, stopStream} = useVideoStream();
   const [isPending, startTransition] = useTransition();
   return (
@@ -24,7 +29,7 @@ export function CapturePhoto({onCapture}: {onCapture: () => void}) {
         color="primary"
         size="lg"
         endContent={<CameraIcon />}
-        isDisabled={isPending}
+        isDisabled={isDisabled || isPending}
         fullWidth
         onPress={startStream}>
         Capture photo
