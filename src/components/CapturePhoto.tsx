@@ -7,6 +7,7 @@ import {
   X as XIcon,
 } from "lucide-react";
 import {useEffect, useRef, useState, useTransition} from "react";
+import {FocusScope} from "react-aria";
 import {createPortal} from "react-dom";
 import {useScrollLock} from "usehooks-ts";
 
@@ -36,14 +37,16 @@ export function CapturePhoto({isDisabled, onCapture}: CapturePhotoProps) {
       </Button>
       {isDefined(stream) &&
         createPortal(
-          <Camera
-            stream={stream}
-            onCapture={() => {
-              stopStream();
-              startTransition(onCapture);
-            }}
-            onClose={stopStream}
-          />,
+          <FocusScope contain restoreFocus autoFocus>
+            <Camera
+              stream={stream}
+              onCapture={() => {
+                stopStream();
+                startTransition(onCapture);
+              }}
+              onClose={stopStream}
+            />
+          </FocusScope>,
           document.body,
         )}
     </>
