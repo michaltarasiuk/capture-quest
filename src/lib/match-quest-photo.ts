@@ -19,16 +19,11 @@ export async function matchQuestPhoto(questId: number) {
   invariant(isDefined(quest), `Quest with id ${questId} not found`);
   const {object} = await generateObject({
     model: groq("openai/gpt-oss-20b"),
-    schema: z.union([
-      z.object({
-        matches: z.literal(true),
-      }),
-      z.object({
-        matches: z.literal(false),
-        reason: z.string(),
-        hint: z.string(),
-      }),
-    ]),
+    schema: z.object({
+      matches: z.boolean(),
+      reason: z.string(),
+      hint: z.string(),
+    }),
     messages: [
       {
         role: "user",

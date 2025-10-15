@@ -50,8 +50,8 @@ export function QuestDetails() {
           <CapturePhoto
             isDisabled={completedQuests.includes(quest.id)}
             onCapture={async () => {
-              const result = await matchQuestPhoto(quest.id);
-              if (result.matches) {
+              const {matches, reason, hint} = await matchQuestPhoto(quest.id);
+              if (matches) {
                 setCompletedQuests((completedQuests) => [
                   ...completedQuests,
                   quest.id,
@@ -61,7 +61,6 @@ export function QuestDetails() {
                   color: "success",
                 });
               } else {
-                const {reason, hint} = result;
                 addToast({
                   title: "Photo did not match",
                   description: reason + " " + hint,
