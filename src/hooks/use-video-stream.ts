@@ -8,7 +8,9 @@ export function useVideoStream() {
   async function startStream() {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({
-        video: true,
+        video: {
+          facingMode: "environment",
+        },
       });
       setStream(stream);
     } catch (error) {
