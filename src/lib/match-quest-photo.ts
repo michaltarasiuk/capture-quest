@@ -14,11 +14,11 @@ const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
-export async function matchQuestPhoto(questId: number) {
+export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
   const quest = quests.find((q) => q.id === questId);
   invariant(isDefined(quest), `Quest with id ${questId} not found`);
   const {object} = await generateObject({
-    model: groq("openai/gpt-oss-20b"),
+    model: groq("meta-llama/llama-4-scout-17b-16e-instruct"),
     schema: z.object({
       matches: z.boolean(),
       reason: z.string(),
@@ -43,6 +43,10 @@ export async function matchQuestPhoto(questId: number) {
               - Keep "hint" concise (1 short sentence or phrase)
               - Both "reason" and "hint" MUST start with a capital letter and end with a period
             `,
+          },
+          {
+            type: "image",
+            image: imageDataUrl,
           },
         ],
       },

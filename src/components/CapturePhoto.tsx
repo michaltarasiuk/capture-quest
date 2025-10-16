@@ -18,7 +18,7 @@ import {isDefined} from "@/lib/is-defined";
 
 interface CapturePhotoProps {
   isDisabled: boolean;
-  onCapture: () => void;
+  onCapture: (imageDataUrl: string) => void;
 }
 
 export function CapturePhoto({isDisabled, onCapture}: CapturePhotoProps) {
@@ -40,9 +40,9 @@ export function CapturePhoto({isDisabled, onCapture}: CapturePhotoProps) {
           <FocusScope contain restoreFocus autoFocus>
             <Camera
               stream={stream}
-              onCapture={() => {
+              onCapture={(imageDataUrl) => {
                 stopStream();
-                startTransition(onCapture);
+                startTransition(() => onCapture(imageDataUrl));
               }}
               onClose={stopStream}
             />
@@ -55,7 +55,7 @@ export function CapturePhoto({isDisabled, onCapture}: CapturePhotoProps) {
 
 interface CameraProps {
   stream: MediaStream;
-  onCapture: () => void;
+  onCapture: (imageDataUrl: string) => void;
   onClose: () => void;
 }
 
@@ -78,7 +78,8 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
       const context = canvas.getContext("2d");
       if (isDefined(context)) {
         context.drawImage(video, 0, 0);
-        onCapture();
+        const imageDataUrl = canvas.toDataURL("image/jpeg");
+        onCapture(imageDataUrl);
       }
     }
   }
