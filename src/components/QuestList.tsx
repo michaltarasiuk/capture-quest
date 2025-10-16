@@ -12,7 +12,7 @@ import quests from "@/quests";
 
 import {DifficultyChip} from "./DifficultyChip";
 
-export function QuestList() {
+export function QuestList({onNavigate}: {onNavigate: () => void}) {
   const questId = useQuestId();
   const completedQuests = useAtomValue(completedQuestsAtom);
   const navigateToQuest = useQuestNavigation();
@@ -32,7 +32,10 @@ export function QuestList() {
             isPressable={!q.completed}
             isDisabled={q.completed}
             fullWidth
-            onPress={() => navigateToQuest(q.id)}>
+            onPress={() => {
+              navigateToQuest(q.id);
+              onNavigate();
+            }}>
             <CardBody className={cn("flex flex-row")}>
               <div className={cn("flex-1")}>
                 <h3 className={cn("flex items-center gap-1 font-semibold")}>

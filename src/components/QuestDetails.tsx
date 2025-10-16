@@ -20,7 +20,7 @@ import quests from "@/quests";
 import {CapturePhoto} from "./CapturePhoto";
 import {DifficultyChip} from "./DifficultyChip";
 
-export function QuestDetails() {
+export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   const questId = useQuestId();
   const [completedQuests, setCompletedQuests] = useAtom(completedQuestsAtom);
   const quest = quests.find((q) => q.id === questId);
@@ -28,7 +28,7 @@ export function QuestDetails() {
     return null;
   }
   return (
-    <div className={cn("order-first lg:order-none")}>
+    <div ref={ref} className={cn("order-first lg:order-none")}>
       <Card className={cn("sticky top-3")}>
         <CardHeader className={cn("flex justify-between")}>
           <h2 className={cn("text-lg font-semibold uppercase")}>
