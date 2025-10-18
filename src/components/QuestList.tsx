@@ -36,7 +36,7 @@ export function QuestList({onNavigate}: {onNavigate: () => void}) {
               navigateToQuest(q.id);
               onNavigate();
             }}>
-            <CardBody className={cn("flex flex-row")}>
+            <CardBody className={cn("flex flex-row gap-2")}>
               <div className={cn("flex-1")}>
                 <h3 className={cn("flex items-center gap-1 font-semibold")}>
                   {q.title}
@@ -63,7 +63,7 @@ export function SkeletonQuestList() {
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
       {Array.from({length: quests.length}, (_, i) => (
-        <Skeleton key={i} className={cn("h-22 rounded-2xl md:h-17")} />
+        <Skeleton key={i} className={cn("h-27 rounded-2xl md:h-17")} />
       ))}
     </div>
   );
