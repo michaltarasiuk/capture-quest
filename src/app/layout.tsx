@@ -1,22 +1,18 @@
-"use client";
-
 import "./globals.css";
 
-import {HeroUIProvider, ToastProvider} from "@heroui/react";
-import {Provider} from "jotai";
-import {Geist, Geist_Mono} from "next/font/google";
+import {Metadata} from "next";
 
+import {Providers} from "@/components/Providers";
 import {cn} from "@/lib/cn";
+import {geistMono, geistSans} from "@/lib/fonts";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
+export const metadata: Metadata = {
+  title: "Capture Photo - Photo Quest Challenges",
+  description:
+    "Complete fun photo challenges and quests around your city. " +
+    "Find street art, red cars, local markets, and more. " +
+    "Earn points by capturing unique moments.",
+};
 
 export default function Layout({children}: LayoutProps<"/">) {
   return (
@@ -26,10 +22,7 @@ export default function Layout({children}: LayoutProps<"/">) {
           "min-h-screen bg-gradient-to-br from-blue-50 to-purple-50",
           `${geistSans.variable} ${geistMono.variable} text-gray-900 antialiased`,
         )}>
-        <HeroUIProvider className={cn("container mx-auto px-3 py-6")}>
-          <Provider>{children}</Provider>
-          <ToastProvider />
-        </HeroUIProvider>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
