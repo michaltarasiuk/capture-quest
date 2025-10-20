@@ -31,17 +31,19 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
           {
             type: "text",
             text: dedent`
-              You are a photo quest validator. Analyze this photo to determine if it matches the quest requirements.
+              Determine if this photo completes the quest.
 
-              Quest: ${quest.title}
+              QUEST REQUIREMENTS:
+              Title: ${quest.title}
               Description: ${quest.description}
 
-              Evaluate if the photo correctly completes this quest.
-              
-              Important:
-              - Keep "reason" brief (1-2 sentences max)
-              - Keep "hint" concise (1 short sentence or phrase)
-              - Both "reason" and "hint" MUST start with a capital letter and end with a period
+              YOUR TASK:
+              Analyze the photo and check if it meets the quest requirements.
+              Set "matches" to true only if the photo clearly fulfills the quest.
+
+              If matches = false, provide brief feedback:
+              - "reason": One sentence explaining why (proper grammar)
+              - "hint": One practical tip to help complete the quest (proper grammar)
             `,
           },
           {
