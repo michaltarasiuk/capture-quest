@@ -26,8 +26,8 @@ export function QuestList({onNavigate}: {onNavigate: () => void}) {
         .map((q) => (
           <Card
             key={q.id}
-            className={cn({
-              "ring-2 ring-blue-500": q.id === questId,
+            className={cn("border-2 border-transparent", {
+              "border-[hsl(var(--heroui-focus))]": q.id === questId,
             })}
             isPressable={!q.completed}
             isDisabled={q.completed}
@@ -63,7 +63,7 @@ export function SkeletonQuestList() {
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
       {Array.from({length: quests.length}, (_, i) => (
-        <Skeleton key={i} className={cn("h-27 rounded-2xl md:h-17")} />
+        <Skeleton key={i} className={cn("h-23 rounded-2xl md:h-18")} />
       ))}
     </div>
   );
