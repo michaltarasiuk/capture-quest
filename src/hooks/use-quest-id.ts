@@ -6,11 +6,16 @@ import {completedQuestsAtom} from "@/lib/storage";
 import quests from "@/quests";
 
 export function useQuestId() {
-  const searchId = useSearchParams().get("id");
+  const questIdParam = useSearchParams().get("id");
   const completedQuests = useAtomValue(completedQuestsAtom);
-  function getFirstIncompleteQuestId() {
-    const quest = quests.find((q) => !completedQuests.includes(q.id));
-    return quest?.id;
+  let questId: number | undefined;
+  if (isDefined(questIdParam)) {
+    questId = Number(questIdParam);
+  } else {
+    const firstIncompleteQuest = quests.find(
+      (q) => !completedQuests.includes(q.id),
+    );
+    questId = firstIncompleteQuest?.id;
   }
-  return isDefined(searchId) ? Number(searchId) : getFirstIncompleteQuestId();
+  return questId;
 }

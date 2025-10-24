@@ -5,7 +5,7 @@ export function useQuestNavigation() {
   function navigateToQuest(id: number) {
     const updatedParams = new URLSearchParams(params);
     updatedParams.set("id", String(id));
-    window.history.pushState(null, "", "?" + updatedParams);
+    window.history.pushState(null, "", `?${updatedParams}`);
   }
   return navigateToQuest;
 }

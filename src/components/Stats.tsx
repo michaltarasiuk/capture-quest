@@ -4,7 +4,7 @@ import {Card, CardBody, Skeleton} from "@heroui/react";
 import {useAtomValue} from "jotai";
 
 import {cn} from "@/lib/cn";
-import {formatPercentage} from "@/lib/percentage";
+import {formatPercentage} from "@/lib/math";
 import {
   completedQuestsCountAtom,
   completedQuestsPercentageAtom,

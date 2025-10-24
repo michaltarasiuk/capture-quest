@@ -31,13 +31,9 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
           {
             type: "text",
             text: dedent`
-              Determine if this photo completes the quest.
-
-              QUEST REQUIREMENTS:
               Title: ${quest.title}
               Description: ${quest.description}
 
-              YOUR TASK:
               Analyze the photo and check if it meets the quest requirements.
               Set "matches" to true only if the photo clearly fulfills the quest.
 
