@@ -31,15 +31,19 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
           {
             type: "text",
             text: dedent`
-              Title: ${quest.title}
-              Description: ${quest.description}
-
-              Analyze the photo and check if it meets the quest requirements.
-              Set "matches" to true only if the photo clearly fulfills the quest.
-
-              If matches = false, provide brief feedback:
-              - "reason": One sentence explaining why (proper grammar)
-              - "hint": One practical tip to help complete the quest (proper grammar)
+              You are tasked with analyzing a photo for a quest. 
+              The quest details are as follows:
+              
+              - Title: ${quest.title}
+              - Description: ${quest.description}
+              - Hint: ${quest.hint}
+              
+              Please determine if the submitted photo matches the quest criteria. 
+              Provide your answer with the following structure:
+              
+              - matches: true if the photo meets the requirements, false otherwise.
+              - reason: a brief explanation of your decision.
+              - hint: any additional guidance or information regarding the match.
             `,
           },
           {
