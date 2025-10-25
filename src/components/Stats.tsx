@@ -4,7 +4,6 @@ import {Card, CardBody, Skeleton} from "@heroui/react";
 import {useAtomValue} from "jotai";
 
 import {cn} from "@/lib/cn";
-import {formatPercentage} from "@/lib/math";
 import {
   completedQuestsCountAtom,
   completedQuestsPercentageAtom,
@@ -32,7 +31,7 @@ export function Stats() {
       <Card>
         <CardBody className={cn("space-y-2")}>
           <h2 className={cn("text-3xl font-bold text-purple-600")}>
-            {formatPercentage(percentage)}
+            {percentage}
           </h2>
           <p className={cn("text-sm text-gray-600")}>Progress</p>
         </CardBody>
