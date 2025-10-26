@@ -8,7 +8,7 @@ import {SkeletonStats, Stats} from "@/components/Stats";
 import {cn} from "@/lib/cn";
 import {isMobile} from "@/lib/is-mobile";
 
-export function QuestsContent() {
+export function QuestsView() {
   const [detailsRef, isDetailsVisible, detailsEntry] = useIntersectionObserver({
     threshold: 0.5,
   });
@@ -35,7 +35,7 @@ export function QuestsContent() {
   );
 }
 
-export function SkeletonQuestsContent() {
+export function SkeletonQuestsView() {
   return (
     <>
       <SkeletonStats />

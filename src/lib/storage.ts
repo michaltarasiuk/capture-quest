@@ -3,7 +3,7 @@ import {atomWithStorage} from "jotai/utils";
 
 import quests from "@/quests";
 
-import {percentage} from "./math";
+import {percentage} from "./percentage";
 
 export const completedQuestsAtom = atomWithStorage<number[]>(
   "completed_quests",
