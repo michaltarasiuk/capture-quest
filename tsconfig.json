@@ -26,13 +26,6 @@
     "incremental": true,
     "skipLibCheck": true
   },
-  "include": [
-    ".next/types/**/*.ts",
-    ".storybook/*.ts",
-    ".storybook/*.tsx",
-    "**/*.ts",
-    "**/*.tsx",
-    "next-env.d.ts"
-  ],
+  "include": [".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "next-env.d.ts"],
   "exclude": ["node_modules"]
 }
