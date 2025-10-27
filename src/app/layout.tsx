@@ -7,7 +7,7 @@ import {cn} from "@/lib/cn";
 import {geistMono, geistSans} from "@/lib/fonts";
 
 export const metadata: Metadata = {
-  title: "Capture Photo - Photo Quest Challenges",
+  title: "Capture Quest - Photo Quest Challenges",
 };
 
 export default function Layout({children}: LayoutProps<"/">) {

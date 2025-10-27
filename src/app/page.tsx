@@ -7,7 +7,7 @@ import {cn} from "@/lib/cn";
 export default function Page() {
   return (
     <div className={cn("space-y-6")}>
-      <h1 className={cn("text-3xl font-bold")}>Capture Photo</h1>
+      <h1 className={cn("text-3xl font-bold")}>Capture Quest</h1>
       <ClientGate fallback={<SkeletonQuestsView />}>
         {() => <QuestsView />}
       </ClientGate>
