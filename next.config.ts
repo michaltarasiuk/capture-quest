@@ -1,7 +1,9 @@
 import type {NextConfig} from "next";
 import invariant from "tiny-invariant";
 
-const nextConfig: NextConfig = {};
+const nextConfig: NextConfig = {
+  reactCompiler: true,
+};
 export default nextConfig;
 
 invariant(

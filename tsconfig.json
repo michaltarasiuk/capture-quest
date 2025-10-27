@@ -19,13 +19,19 @@
     },
     "plugins": [{"name": "next"}],
     "noEmit": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "allowJs": true,
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "incremental": true,
     "skipLibCheck": true
   },
-  "include": [".next/types/**/*.ts", "**/*.ts", "**/*.tsx", "next-env.d.ts"],
+  "include": [
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "next-env.d.ts"
+  ],
   "exclude": ["node_modules"]
 }

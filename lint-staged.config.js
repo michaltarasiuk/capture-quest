@@ -8,7 +8,7 @@ export default lintStagedConfig;
 
 /** @type {import('lint-staged').Configuration} */
 function buildEslintCommand(filenames) {
-  return `next lint --fix --file ${filenames
+  return `eslint --fix ${filenames
     .map((f) => path.relative(process.cwd(), f))
-    .join(" --file ")}`;
+    .join(" ")}`;
 }
