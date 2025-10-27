@@ -1,5 +1,3 @@
-"use client";
-
 import {Card, CardBody, Skeleton} from "@heroui/react";
 import {useAtomValue} from "jotai";
 import {Award} from "lucide-react";
