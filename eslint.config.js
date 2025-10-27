@@ -27,6 +27,13 @@ const eslintConfig = [
           varsIgnorePattern: "^_",
         },
       ],
+      "@typescript-eslint/no-namespace": [
+        "error",
+        {
+          allowDeclarations: true,
+          allowDefinitionFiles: true,
+        },
+      ],
     },
   },
   {
