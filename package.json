@@ -1,12 +1,16 @@
 {
   "type": "module",
   "scripts": {
+    "prepare": "husky",
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
     "start": "next start",
-    "lint": "eslint",
-    "format": "prettier --write .",
-    "prepare": "husky"
+    "prettier-check": "prettier --check .",
+    "prettier-write": "prettier --write .",
+    "type-check": "next typegen && tsc --noEmit --incremental false",
+    "lint": "next lint",
+    "lint-fix": "eslint --fix .",
+    "ci": "bun run prettier-check && bun run type-check && bun run lint && bun run build"
   },
   "dependencies": {
     "@ai-sdk/groq": "^2.0.24",
