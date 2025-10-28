@@ -1,13 +1,15 @@
 import type {NextConfig} from "next";
 import invariant from "tiny-invariant";
 
+import {isDefined} from "@/lib/is-defined";
+
 const nextConfig: NextConfig = {
   reactCompiler: true,
 };
 export default nextConfig;
 
 invariant(
-  process.env.GROQ_API_KEY,
+  isDefined(process.env.GROQ_API_KEY),
   "Environment variable GROQ_API_KEY is missing",
 );
 
