@@ -1,6 +1,6 @@
 import {Card, CardBody, Skeleton} from "@heroui/react";
 import {useAtomValue} from "jotai";
-import {Award} from "lucide-react";
+import {AwardIcon} from "lucide-react";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {useQuestNavigation} from "@/hooks/use-quest-navigation";
@@ -39,7 +39,7 @@ export function QuestList({onNavigate}: {onNavigate: () => void}) {
                 <h3 className={cn("flex items-center gap-1 font-semibold")}>
                   {q.title}
                   {q.completed && (
-                    <Award className={cn("size-5 stroke-green-600")} />
+                    <AwardIcon className={cn("size-5 stroke-green-600")} />
                   )}
                 </h3>
                 <p className={cn("text-sm text-gray-600")}>{q.description}</p>

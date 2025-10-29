@@ -1,11 +1,7 @@
 "use client";
 
 import {Button, Skeleton} from "@heroui/react";
-import {
-  Camera as CameraIcon,
-  Circle as CircleIcon,
-  X as XIcon,
-} from "lucide-react";
+import {CameraIcon, CircleIcon, XIcon} from "lucide-react";
 import {useEffect, useRef, useState, useTransition} from "react";
 import {FocusScope} from "react-aria";
 import {createPortal} from "react-dom";
