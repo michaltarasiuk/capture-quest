@@ -62,7 +62,7 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
                 ]);
                 addToast({
                   title: "Quest completed",
-                  description: reason,
+                  description: reason + " " + hint,
                   color: "success",
                 });
               } else {

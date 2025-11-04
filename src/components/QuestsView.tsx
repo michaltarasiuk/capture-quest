@@ -15,7 +15,7 @@ export function QuestsView() {
   });
   function handleNavigation() {
     if (isMobile() && !isDetailsVisible) {
-      detailsEntry!.target.scrollIntoView(AppScrollOptions);
+      detailsEntry?.target.scrollIntoView(AppScrollOptions);
     }
   }
   return (

@@ -32,24 +32,23 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
           {
             type: "text",
             text: dedent`
-              You are photo validator for a quest game. Analyze how well the submitted photo matches the quest requirements.
+              You check photos for a quest game. Look at this photo and decide if it matches the quest.
               
-              Quest Details:
+              Quest:
               - Title: ${quest.title}
               - Description: ${quest.description}
               - Hint: ${quest.hint}
               
-              Instructions:
-              1. Carefully examine the photo for elements matching the quest description
-              2. Be reasonable - consider the spirit of the quest, not just literal interpretation
-              3. Lean towards being slightly lenient to encourage player engagement
+              Rules:
+              1. Look for things in the photo that match the quest description
+              2. Think about what the quest really means, not just the exact words
               
-              Provide your analysis with a confidence score:
-              - confidence: ${ConfidenceRanges.poor.join("-")} = poor match, doesn't fulfill quest
-              - confidence: ${ConfidenceRanges.partial.join("-")} = partial match, some elements present
-              - confidence: ${ConfidenceRanges.excellent.join("-")} = excellent match, clearly fulfills quest
-              - reason: explain your assessment in 1-2 sentences
-              - hint: if low confidence, give guidance on what's missing. If high confidence, give encouraging feedback
+              Give your answer:
+              - confidence: ${ConfidenceRanges.poor.join("-")} = doesn't match the quest
+              - confidence: ${ConfidenceRanges.partial.join("-")} = matches a little bit
+              - confidence: ${ConfidenceRanges.excellent.join("-")} = matches very well
+              - reason: explain why in 1-2 sentences
+              - hint: if it doesn't match well, say what's missing. If it matches well, say something nice
             `,
           },
           {
