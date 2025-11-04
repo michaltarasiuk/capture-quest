@@ -51,24 +51,34 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
           <CapturePhoto
             isDisabled={completedQuests.includes(quest.id)}
             onCapture={async (imageDataUrl) => {
-              const {confidence, reason, hint} = await matchQuestPhoto(
-                quest.id,
-                imageDataUrl,
-              );
-              if (isConfidenceSuficent(confidence)) {
-                setCompletedQuests((completedQuests) => [
-                  ...completedQuests,
+              try {
+                const {confidence, reason, hint} = await matchQuestPhoto(
                   quest.id,
-                ]);
+                  imageDataUrl,
+                );
+                if (isConfidenceSuficent(confidence)) {
+                  setCompletedQuests((completedQuests) => [
+                    ...completedQuests,
+                    quest.id,
+                  ]);
+                  addToast({
+                    title: "Quest completed",
+                    description: reason + " " + hint,
+                    color: "success",
+                  });
+                } else {
+                  addToast({
+                    title: "Photo did not match",
+                    description: reason + " " + hint,
+                    color: "danger",
+                  });
+                }
+              } catch {
                 addToast({
-                  title: "Quest completed",
-                  description: reason + " " + hint,
-                  color: "success",
-                });
-              } else {
-                addToast({
-                  title: "Photo did not match",
-                  description: reason + " " + hint,
+                  title: "Unexpected error",
+                  description:
+                    "Something went wrong while processing your photo. " +
+                    "Please try again.",
                   color: "danger",
                 });
               }
