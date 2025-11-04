@@ -18,10 +18,12 @@ const groq = createGroq({
 export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
   const quest = quests.find((q) => q.id === questId);
   invariant(isDefined(quest), `Quest with id ${questId} not found`);
+  const [confidenceMin] = ConfidenceRanges.poor;
+  const [, confidenceMax] = ConfidenceRanges.excellent;
   const {object} = await generateObject({
     model: groq("meta-llama/llama-4-maverick-17b-128e-instruct"),
     schema: z.object({
-      confidence: z.number().min(0).max(1),
+      confidence: z.number().min(confidenceMin).max(confidenceMax),
       reason: z.string(),
       hint: z.string(),
     }),
