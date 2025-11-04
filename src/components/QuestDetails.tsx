@@ -12,6 +12,7 @@ import {useAtom} from "jotai";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
+import {isConfidenceSuficent} from "@/lib/confidence";
 import {isDefined} from "@/lib/is-defined";
 import {matchQuestPhoto} from "@/lib/match-quest-photo";
 import {completedQuestsAtom} from "@/lib/storage";
@@ -50,17 +51,18 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
           <CapturePhoto
             isDisabled={completedQuests.includes(quest.id)}
             onCapture={async (imageDataUrl) => {
-              const {matches, reason, hint} = await matchQuestPhoto(
+              const {confidence, reason, hint} = await matchQuestPhoto(
                 quest.id,
                 imageDataUrl,
               );
-              if (matches) {
+              if (isConfidenceSuficent(confidence)) {
                 setCompletedQuests((completedQuests) => [
                   ...completedQuests,
                   quest.id,
                 ]);
                 addToast({
                   title: "Quest completed",
+                  description: reason,
                   color: "success",
                 });
               } else {
