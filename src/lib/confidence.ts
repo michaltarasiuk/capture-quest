@@ -3,6 +3,12 @@ export function isConfidenceSuficent(c: number) {
   return c >= min;
 }
 
+export function getConfidenceRange() {
+  const [min] = ConfidenceRanges.poor;
+  const [, max] = ConfidenceRanges.excellent;
+  return [min, max] as const;
+}
+
 export const ConfidenceRanges = {
   poor: [0, 0.4],
   partial: [0.5, 0.7],

@@ -8,7 +8,7 @@ import * as z from "zod";
 
 import quests from "@/quests";
 
-import {ConfidenceRanges} from "./confidence";
+import {ConfidenceRanges, getConfidenceRange} from "./confidence";
 import {isDefined} from "./is-defined";
 
 const groq = createGroq({
@@ -18,10 +18,9 @@ const groq = createGroq({
 export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
   const quest = quests.find((q) => q.id === questId);
   invariant(isDefined(quest), `Quest with id ${questId} not found`);
-  const [confidenceMin] = ConfidenceRanges.poor;
-  const [, confidenceMax] = ConfidenceRanges.excellent;
+  const [confidenceMin, confidenceMax] = getConfidenceRange();
   const {object} = await generateObject({
-    model: groq("meta-llama/llama-4-maverick-17b-128e-instruct"),
+    model: groq("meta-llama/llama-4-scout-17b-16e-instruct"),
     schema: z.object({
       confidence: z.number().min(confidenceMin).max(confidenceMax),
       reason: z.string(),
@@ -60,7 +59,6 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
         ],
       },
     ],
-    temperature: 0.3,
   });
   return object;
 }
