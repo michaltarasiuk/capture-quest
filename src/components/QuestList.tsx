@@ -11,19 +11,20 @@ export function QuestList({onNavigate}: {onNavigate: () => void}) {
   const completedQuests = useAtomValue(completedQuestsAtom);
   const navigateToQuest = useQuestNavigation();
   return (
-    <div className={cn("space-y-3 lg:col-span-2")}>
+    <ul className={cn("space-y-3 lg:col-span-2")}>
       {quests.map((q) => (
-        <QuestCard
-          key={q.id}
-          completed={completedQuests.includes(q.id)}
-          onPress={() => {
-            navigateToQuest(q.id);
-            onNavigate();
-          }}
-          {...q}
-        />
+        <li key={q.id}>
+          <QuestCard
+            completed={completedQuests.includes(q.id)}
+            onPress={() => {
+              navigateToQuest(q.id);
+              onNavigate();
+            }}
+            {...q}
+          />
+        </li>
       ))}
-    </div>
+    </ul>
   );
 }
 
