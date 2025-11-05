@@ -1,4 +1,3 @@
-import {Skeleton} from "@heroui/react";
 import {useAtomValue} from "jotai";
 
 import {useQuestNavigation} from "@/hooks/use-quest-navigation";
@@ -6,7 +5,7 @@ import {cn} from "@/lib/cn";
 import {completedQuestsAtom} from "@/lib/storage";
 import quests from "@/quests";
 
-import {QuestCard} from "./QuestCard";
+import {QuestCard, SkeletonOrderCard} from "./QuestCard";
 
 export function QuestList({onNavigate}: {onNavigate: () => void}) {
   const completedQuests = useAtomValue(completedQuestsAtom);
@@ -32,7 +31,7 @@ export function SkeletonQuestList() {
   return (
     <div className={cn("space-y-3 lg:col-span-2")}>
       {Array.from({length: quests.length}, (_, i) => (
-        <Skeleton key={i} className={cn("h-23 rounded-2xl md:h-18")} />
+        <SkeletonOrderCard key={i} />
       ))}
     </div>
   );

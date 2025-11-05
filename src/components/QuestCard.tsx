@@ -1,4 +1,4 @@
-import {Card, CardBody} from "@heroui/react";
+import {Card, CardBody, Skeleton} from "@heroui/react";
 import {AwardIcon} from "lucide-react";
 
 import {useQuestId} from "@/hooks/use-quest-id";
@@ -59,4 +59,8 @@ export function QuestCard({
       </CardBody>
     </Card>
   );
+}
+
+export function SkeletonOrderCard() {
+  return <Skeleton className={cn("h-23 rounded-2xl md:h-18")} />;
 }
