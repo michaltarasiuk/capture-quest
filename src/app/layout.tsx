@@ -14,7 +14,7 @@ export default function Layout({children}: LayoutProps<"/">) {
   return (
     <html lang="en">
       <body
-        className={cn("h-dvh bg-gray-50 text-gray-900 antialiased", [
+        className={cn("min-h-dvh bg-gray-50 text-gray-900 antialiased", [
           geistSans.variable,
           geistMono.variable,
         ])}>
