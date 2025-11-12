@@ -44,7 +44,9 @@ export function QuestCard({
               <AwardIcon className={cn("size-5 stroke-green-600")} />
             )}
           </h3>
-          <p className={cn("text-sm text-gray-600")}>{description}</p>
+          <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
+            {description}
+          </p>
         </div>
         <div className={cn("flex gap-2")}>
           <DifficultyChip difficulty={difficulty} />

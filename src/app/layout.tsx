@@ -12,9 +12,9 @@ export const metadata: Metadata = {
 
 export default function Layout({children}: LayoutProps<"/">) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={cn("min-h-dvh bg-gray-50 text-gray-900 antialiased", [
+        className={cn("text-foreground bg-background min-h-dvh antialiased", [
           geistSans.variable,
           geistMono.variable,
         ])}>
