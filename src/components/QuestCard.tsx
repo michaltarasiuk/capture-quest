@@ -30,7 +30,7 @@ export function QuestCard({
     <Card
       key={id}
       className={cn("border-2 border-transparent", {
-        "border-[hsl(var(--heroui-focus))]": id === questId,
+        "border-focus": id === questId,
       })}
       isPressable={!completed}
       isDisabled={completed}

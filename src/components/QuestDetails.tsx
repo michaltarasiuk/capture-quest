@@ -40,11 +40,15 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
         <CardBody className={cn("space-y-3")}>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Description</h3>
-            <p className={cn("text-sm text-gray-600")}>{quest.description}</p>
+            <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
+              {quest.description}
+            </p>
           </div>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Hint</h3>
-            <p className={cn("text-sm text-gray-600")}>{quest.hint}</p>
+            <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
+              {quest.hint}
+            </p>
           </div>
         </CardBody>
         <CardFooter>
