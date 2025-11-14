@@ -5,6 +5,7 @@ import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
 
 import {type Difficulty, DifficultyChip} from "./DifficultyChip";
+import {Text} from "./Text";
 
 interface QuestCardProps {
   id: number;
@@ -49,26 +50,30 @@ export function QuestCard({
               />
             )}
           </h3>
-          <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
-            {description}
-          </p>
+          <Text>{description}</Text>
         </div>
         <div className={cn("flex items-start gap-2")}>
           <DifficultyChip difficulty={difficulty} />
-          <span
-            className={cn("font-semibold", "before:content-['+']", {
-              "text-emerald-600 dark:text-emerald-400": difficulty === "easy",
-              "text-amber-600 dark:text-amber-400": difficulty === "medium",
-              "text-rose-600 dark:text-rose-400": difficulty === "hard",
-            })}>
-            {points}
-          </span>
+          <Points>{points}</Points>
         </div>
       </CardBody>
     </Card>
   );
 }
 
+function Points({children}: {children: React.ReactNode}) {
+  return (
+    <span
+      className={cn(
+        "font-semibold text-indigo-600",
+        "dark:text-indigo-400",
+        "before:content-['+']",
+      )}>
+      {children}
+    </span>
+  );
+}
+
 export function SkeletonOrderCard() {
-  return <Skeleton className={cn("h-23 rounded-2xl md:h-18")} />;
+  return <Skeleton className={cn("h-23 rounded-2xl", "md:h-18")} />;
 }

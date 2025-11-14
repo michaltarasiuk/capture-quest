@@ -11,7 +11,7 @@ export function QuestList({onNavigate}: {onNavigate: () => void}) {
   const completedQuests = useAtomValue(completedQuestsAtom);
   const navigateToQuest = useQuestNavigation();
   return (
-    <ul className={cn("space-y-3 lg:col-span-2")}>
+    <ul className={cn("space-y-3", "lg:col-span-2")}>
       {quests.map((q) => (
         <li key={q.id}>
           <QuestCard
@@ -30,7 +30,7 @@ export function QuestList({onNavigate}: {onNavigate: () => void}) {
 
 export function SkeletonQuestList() {
   return (
-    <div className={cn("space-y-3 lg:col-span-2")}>
+    <div className={cn("space-y-3", "lg:col-span-2")}>
       {Array.from({length: quests.length}, (_, i) => (
         <SkeletonOrderCard key={i} />
       ))}

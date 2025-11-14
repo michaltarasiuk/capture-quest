@@ -20,6 +20,7 @@ import quests from "@/quests";
 
 import {CapturePhoto} from "./CapturePhoto";
 import {DifficultyChip} from "./DifficultyChip";
+import {Text} from "./Text";
 
 export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   const questId = useQuestId();
@@ -29,7 +30,7 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
     return null;
   }
   return (
-    <div ref={ref} className={cn("order-first lg:order-none")}>
+    <div ref={ref} className={cn("order-first", "lg:order-none")}>
       <Card className={cn("sticky top-3")}>
         <CardHeader className={cn("flex justify-between")}>
           <h2 className={cn("text-lg font-semibold uppercase")}>
@@ -40,15 +41,11 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
         <CardBody className={cn("space-y-3")}>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Description</h3>
-            <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
-              {quest.description}
-            </p>
+            <Text>{quest.description}</Text>
           </div>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Hint</h3>
-            <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
-              {quest.hint}
-            </p>
+            <Text>{quest.hint}</Text>
           </div>
         </CardBody>
         <CardFooter>
@@ -96,6 +93,6 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
 
 export function SkeletonQuestDetails() {
   return (
-    <Skeleton className={cn("order-first h-72 rounded-2xl lg:order-none")} />
+    <Skeleton className={cn("order-first h-72 rounded-2xl", "lg:order-none")} />
   );
 }

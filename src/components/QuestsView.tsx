@@ -13,17 +13,16 @@ export function QuestsView() {
   const [detailsRef, isDetailsVisible, detailsEntry] = useIntersectionObserver({
     threshold: 0.5,
   });
+  function handleNavigation() {
+    if (isMobile() && !isDetailsVisible) {
+      detailsEntry?.target.scrollIntoView(AppScrollOptions);
+    }
+  }
   return (
     <>
       <Stats />
-      <div className={cn("grid grid-cols-1 gap-4 lg:grid-cols-3")}>
-        <QuestList
-          onNavigate={() => {
-            if (isMobile() && !isDetailsVisible) {
-              detailsEntry?.target.scrollIntoView(AppScrollOptions);
-            }
-          }}
-        />
+      <div className={cn("grid grid-cols-1 gap-4", "lg:grid-cols-3")}>
+        <QuestList onNavigate={handleNavigation} />
         <QuestDetails ref={detailsRef} />
       </div>
     </>
@@ -34,7 +33,7 @@ export function SkeletonQuestsView() {
   return (
     <>
       <SkeletonStats />
-      <div className={cn("grid grid-cols-1 gap-4 lg:grid-cols-3")}>
+      <div className={cn("grid grid-cols-1 gap-4", "lg:grid-cols-3")}>
         <SkeletonQuestList />
         <SkeletonQuestDetails />
       </div>

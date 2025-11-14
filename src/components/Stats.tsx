@@ -10,12 +10,19 @@ import {
   completedQuestsPointsAtom,
 } from "@/lib/storage";
 
+import {Text} from "./Text";
+
 export function Stats() {
   const count = useAtomValue(completedQuestsCountAtom);
   const percentage = useAtomValue(completedQuestsPercentageAtom);
   const points = useAtomValue(completedQuestsPointsAtom);
   return (
-    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3")}>
+    <div
+      className={cn(
+        "grid grid-cols-1 gap-4",
+        "sm:grid-cols-2",
+        "md:grid-cols-3",
+      )}>
       <Card>
         <CardBody className={cn("space-y-2")}>
           <h2
@@ -25,9 +32,7 @@ export function Stats() {
             )}>
             {count}
           </h2>
-          <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
-            Quests Completed
-          </p>
+          <Text>Quests Completed</Text>
         </CardBody>
       </Card>
       <Card>
@@ -39,9 +44,7 @@ export function Stats() {
             )}>
             {points}
           </h2>
-          <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
-            Total Points
-          </p>
+          <Text>Total Points</Text>
         </CardBody>
       </Card>
       <Card>
@@ -53,9 +56,7 @@ export function Stats() {
             )}>
             {percentage}
           </h2>
-          <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
-            Progress
-          </p>
+          <Text>Progress</Text>
         </CardBody>
       </Card>
     </div>
@@ -64,7 +65,12 @@ export function Stats() {
 
 export function SkeletonStats() {
   return (
-    <div className={cn("grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3")}>
+    <div
+      className={cn(
+        "grid grid-cols-1 gap-4",
+        "sm:grid-cols-2",
+        "md:grid-cols-3",
+      )}>
       <Skeleton className={cn("h-22 rounded-2xl")} />
       <Skeleton className={cn("h-22 rounded-2xl")} />
       <Skeleton className={cn("h-22 rounded-2xl")} />
