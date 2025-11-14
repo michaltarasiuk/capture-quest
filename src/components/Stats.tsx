@@ -20,8 +20,8 @@ export function Stats() {
         <CardBody className={cn("space-y-2")}>
           <h2
             className={cn(
-              "text-3xl font-bold text-blue-600",
-              "dark:text-blue-400",
+              "text-3xl font-bold text-indigo-600",
+              "dark:text-indigo-400",
             )}>
             {count}
           </h2>
@@ -34,8 +34,8 @@ export function Stats() {
         <CardBody className={cn("space-y-2")}>
           <h2
             className={cn(
-              "text-3xl font-bold text-blue-600",
-              "dark:text-blue-400",
+              "text-3xl font-bold text-indigo-600",
+              "dark:text-indigo-400",
             )}>
             {points}
           </h2>
@@ -48,8 +48,8 @@ export function Stats() {
         <CardBody className={cn("space-y-2")}>
           <h2
             className={cn(
-              "text-3xl font-bold text-purple-600",
-              "dark:text-purple-400",
+              "text-3xl font-bold text-violet-600",
+              "dark:text-violet-400",
             )}>
             {percentage}
           </h2>

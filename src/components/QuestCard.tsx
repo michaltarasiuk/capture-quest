@@ -41,20 +41,26 @@ export function QuestCard({
           <h3 className={cn("flex items-center gap-1 font-semibold")}>
             {title}
             {completed && (
-              <AwardIcon className={cn("size-5 stroke-green-600")} />
+              <AwardIcon
+                className={cn(
+                  "size-5 stroke-emerald-500",
+                  "dark:stroke-emerald-400",
+                )}
+              />
             )}
           </h3>
           <p className={cn("text-sm text-gray-600", "dark:text-gray-400")}>
             {description}
           </p>
         </div>
-        <div className={cn("flex gap-2")}>
+        <div className={cn("flex items-start gap-2")}>
           <DifficultyChip difficulty={difficulty} />
           <span
-            className={cn(
-              "font-semibold text-orange-500",
-              "before:content-['+']",
-            )}>
+            className={cn("font-semibold", "before:content-['+']", {
+              "text-emerald-600 dark:text-emerald-400": difficulty === "easy",
+              "text-amber-600 dark:text-amber-400": difficulty === "medium",
+              "text-rose-600 dark:text-rose-400": difficulty === "hard",
+            })}>
             {points}
           </span>
         </div>
