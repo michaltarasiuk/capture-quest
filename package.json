@@ -17,6 +17,7 @@
     "@heroui/react": "^2.8.5",
     "ai": "^5.0.68",
     "clsx": "^2.1.1",
+    "cva": "npm:class-variance-authority",
     "dedent": "^1.7.0",
     "framer-motion": "^12.23.22",
     "jotai": "^2.15.0",

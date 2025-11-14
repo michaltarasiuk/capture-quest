@@ -1,6 +1,7 @@
 "use client";
 
 import {Card, CardBody, Skeleton} from "@heroui/react";
+import {cva, type VariantProps} from "cva";
 import {useAtomValue} from "jotai";
 
 import {cn} from "@/lib/cn";
@@ -25,43 +26,44 @@ export function Stats() {
       )}>
       <Card>
         <CardBody className={cn("space-y-2")}>
-          <h2
-            className={cn(
-              "text-3xl font-bold text-indigo-600",
-              "dark:text-indigo-400",
-            )}>
-            {count}
-          </h2>
+          <StatHeading>{count}</StatHeading>
           <Text>Quests Completed</Text>
         </CardBody>
       </Card>
       <Card>
         <CardBody className={cn("space-y-2")}>
-          <h2
-            className={cn(
-              "text-3xl font-bold text-indigo-600",
-              "dark:text-indigo-400",
-            )}>
-            {points}
-          </h2>
+          <StatHeading>{points}</StatHeading>
           <Text>Total Points</Text>
         </CardBody>
       </Card>
       <Card>
         <CardBody className={cn("space-y-2")}>
-          <h2
-            className={cn(
-              "text-3xl font-bold text-violet-600",
-              "dark:text-violet-400",
-            )}>
-            {percentage}
-          </h2>
+          <StatHeading variant="violet">{percentage}</StatHeading>
           <Text>Progress</Text>
         </CardBody>
       </Card>
     </div>
   );
 }
+
+function StatHeading({
+  children,
+  ...props
+}: {children: React.ReactNode} & VariantProps<typeof statHeadingVariants>) {
+  return <h2 className={statHeadingVariants(props)}>{children}</h2>;
+}
+
+const statHeadingVariants = cva("text-3xl font-bold", {
+  variants: {
+    variant: {
+      indigo: ["text-indigo-600", "dark:text-indigo-400"],
+      violet: ["text-violet-600", "dark:text-violet-400"],
+    },
+  },
+  defaultVariants: {
+    variant: "indigo",
+  },
+});
 
 export function SkeletonStats() {
   return (

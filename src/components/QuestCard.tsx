@@ -65,8 +65,8 @@ function Points({children}: {children: React.ReactNode}) {
   return (
     <span
       className={cn(
-        "font-semibold text-indigo-600",
-        "dark:text-indigo-400",
+        "font-semibold text-orange-600",
+        "dark:text-orange-400",
         "before:content-['+']",
       )}>
       {children}
