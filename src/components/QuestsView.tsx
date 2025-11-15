@@ -7,22 +7,27 @@ import {QuestList, SkeletonQuestList} from "@/components/QuestList";
 import {SkeletonStats, Stats} from "@/components/Stats";
 import {cn} from "@/lib/cn";
 import {isMobile} from "@/lib/is-mobile";
-import {AppScrollOptions} from "@/lib/scroll-options";
 
 export function QuestsView() {
   const [detailsRef, isDetailsVisible, detailsEntry] = useIntersectionObserver({
     threshold: 0.5,
   });
-  function handleNavigation() {
-    if (isMobile() && !isDetailsVisible) {
-      detailsEntry?.target.scrollIntoView(AppScrollOptions);
-    }
+  function scrollToDetails() {
+    detailsEntry?.target.scrollIntoView({
+      behavior: "smooth",
+    });
   }
   return (
     <>
       <Stats />
       <div className={cn("grid grid-cols-1 gap-4", "lg:grid-cols-3")}>
-        <QuestList onNavigate={handleNavigation} />
+        <QuestList
+          onNavigate={() => {
+            if (isMobile() && !isDetailsVisible) {
+              scrollToDetails();
+            }
+          }}
+        />
         <QuestDetails ref={detailsRef} />
       </div>
     </>
