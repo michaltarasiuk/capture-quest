@@ -9,6 +9,7 @@ import {
   Skeleton,
 } from "@heroui/react";
 import {useAtom} from "jotai";
+import {AwardIcon} from "lucide-react";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
@@ -29,12 +30,22 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   if (!isDefined(quest)) {
     return null;
   }
+  const completed = completedQuests.includes(quest.id);
   return (
     <div ref={ref} className={cn("order-first", "lg:order-none")}>
       <Card className={cn("sticky top-3")}>
         <CardHeader className={cn("flex justify-between")}>
-          <h2 className={cn("text-lg font-semibold uppercase")}>
+          <h2
+            className={cn("flex items-center text-lg font-semibold uppercase")}>
             {quest.title}
+            {completed && (
+              <AwardIcon
+                className={cn(
+                  "ms-1 size-5 stroke-emerald-500",
+                  "dark:stroke-emerald-400",
+                )}
+              />
+            )}
           </h2>
           <DifficultyChip difficulty={quest.difficulty} />
         </CardHeader>
@@ -50,7 +61,7 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
         </CardBody>
         <CardFooter>
           <CapturePhoto
-            isDisabled={completedQuests.includes(quest.id)}
+            isDisabled={completed}
             onCapture={async (imageDataUrl) => {
               try {
                 const {confidence, reason, hint} = await matchQuestPhoto(
