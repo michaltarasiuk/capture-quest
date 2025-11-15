@@ -29,12 +29,11 @@ export function QuestCard({
   const questId = useQuestId();
   return (
     <Card
-      key={id}
+      isPressable={!completed}
+      isDisabled={completed}
       className={cn("border-2 border-transparent", {
         "border-focus": id === questId,
       })}
-      isPressable={!completed}
-      isDisabled={completed}
       fullWidth
       onPress={onPress}>
       <CardBody className={cn("flex flex-row gap-2")}>
