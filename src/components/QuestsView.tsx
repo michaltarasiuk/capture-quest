@@ -12,11 +12,6 @@ export function QuestsView() {
   const [detailsRef, isDetailsVisible, detailsEntry] = useIntersectionObserver({
     threshold: 0.5,
   });
-  function scrollToDetails() {
-    detailsEntry?.target.scrollIntoView({
-      behavior: "smooth",
-    });
-  }
   return (
     <>
       <Stats />
@@ -24,7 +19,7 @@ export function QuestsView() {
         <QuestList
           onNavigate={() => {
             if (isMobile() && !isDetailsVisible) {
-              scrollToDetails();
+              detailsEntry?.target.scrollIntoView({behavior: "smooth"});
             }
           }}
         />
