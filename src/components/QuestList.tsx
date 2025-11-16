@@ -12,18 +12,20 @@ export function QuestList({onNavigate}: {onNavigate: () => void}) {
   const navigateToQuest = useQuestNavigation();
   return (
     <ul className={cn("space-y-3", "lg:col-span-2")}>
-      {quests.map((q) => (
-        <li key={q.id}>
-          <QuestCard
-            completed={completedQuests.includes(q.id)}
-            onPress={() => {
-              navigateToQuest(q.id);
-              onNavigate();
-            }}
-            {...q}
-          />
-        </li>
-      ))}
+      {quests
+        .map((q) => ({...q, completed: completedQuests.includes(q.id)}))
+        .sort((a, b) => Number(a.completed) - Number(b.completed))
+        .map((q) => (
+          <li key={q.id}>
+            <QuestCard
+              onPress={() => {
+                navigateToQuest(q.id);
+                onNavigate();
+              }}
+              {...q}
+            />
+          </li>
+        ))}
     </ul>
   );
 }
