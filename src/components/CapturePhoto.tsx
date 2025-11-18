@@ -80,7 +80,7 @@ function Camera({stream, onCapture, onClose}: CameraProps) {
     }
   }
   return (
-    <div className={cn("fixed inset-0 touch-none")}>
+    <div className={cn("fixed inset-0 z-50 touch-none")}>
       <Video ref={videoRef} />
       <canvas ref={canvasRef} className={cn("hidden")} />
       <Button
