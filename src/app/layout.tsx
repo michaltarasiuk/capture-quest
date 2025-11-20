@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function Layout({children}: LayoutProps<"/">) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={cn("scroll-smooth")} suppressHydrationWarning>
       <body
         className={cn("text-foreground bg-background min-h-dvh antialiased", [
           geistSans.variable,
