@@ -33,7 +33,7 @@ export function CapturePhoto({isDisabled, onCapture}: CapturePhotoProps) {
       </Button>
       {isDefined(stream) &&
         createPortal(
-          <FocusScope contain restoreFocus autoFocus>
+          <FocusScope autoFocus contain restoreFocus>
             <Camera
               stream={stream}
               onCapture={(imageDataUrl) => {
@@ -111,7 +111,7 @@ function Video({ref}: {ref: React.Ref<HTMLVideoElement>}) {
       {!isLoaded && <Skeleton className={cn("size-full")} />}
       <video
         ref={ref}
-        className={cn("size-full object-cover", {
+        className={cn("z-50 size-full object-cover", {
           hidden: !isLoaded,
         })}
         autoPlay

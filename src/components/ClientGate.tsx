@@ -1,6 +1,6 @@
 "use client";
 
-import {useSyncExternalStore} from "react";
+import {useIsClient} from "@/hooks/use-is-client";
 
 interface ClientGateProps {
   fallback: React.ReactNode;
@@ -8,14 +8,6 @@ interface ClientGateProps {
 }
 
 export function ClientGate({fallback, children}: ClientGateProps) {
-  const isClient = useSyncExternalStore(
-    subscribe,
-    () => true,
-    () => false,
-  );
+  const isClient = useIsClient();
   return isClient ? children() : fallback;
-}
-
-function subscribe() {
-  return function () {};
 }

@@ -1,4 +1,4 @@
-export function isConfidenceSuficent(c: number) {
+export function isConfidenceExcellent(c: number) {
   const [min] = ConfidenceRanges.excellent;
   return c >= min;
 }

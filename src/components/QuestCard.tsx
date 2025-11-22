@@ -3,16 +3,19 @@ import {AwardIcon} from "lucide-react";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
+import type quests from "@/quests";
 
-import {type Difficulty, DifficultyChip} from "./DifficultyChip";
+import {DifficultyChip} from "./DifficultyChip";
 import {Text} from "./Text";
+
+type Quest = (typeof quests)[number];
+type Difficulty = Quest["difficulty"];
 
 interface QuestCardProps {
   id: number;
   title: string;
   description: string;
   difficulty: Difficulty;
-  points: number;
   completed: boolean;
   onPress: () => void;
 }
@@ -22,7 +25,6 @@ export function QuestCard({
   title,
   description,
   difficulty,
-  points,
   completed,
   onPress,
 }: QuestCardProps) {
@@ -51,25 +53,9 @@ export function QuestCard({
           </h3>
           <Text>{description}</Text>
         </div>
-        <div className={cn("flex items-start gap-2")}>
-          <DifficultyChip difficulty={difficulty} />
-          <Points>{points}</Points>
-        </div>
+        <DifficultyChip difficulty={difficulty} />
       </CardBody>
     </Card>
-  );
-}
-
-function Points({children}: {children: React.ReactNode}) {
-  return (
-    <span
-      className={cn(
-        "font-semibold text-orange-600",
-        "dark:text-orange-400",
-        "before:content-['+']",
-      )}>
-      {children}
-    </span>
   );
 }
 

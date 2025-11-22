@@ -49,7 +49,7 @@ export function Stats() {
 function StatHeading({
   children,
   ...props
-}: {children: React.ReactNode} & VariantProps<typeof statHeadingVariants>) {
+}: VariantProps<typeof statHeadingVariants> & {children: React.ReactNode}) {
   return <h2 className={statHeadingVariants(props)}>{children}</h2>;
 }
 

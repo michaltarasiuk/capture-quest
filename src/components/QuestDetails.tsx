@@ -14,7 +14,7 @@ import useSound from "use-sound";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
-import {isConfidenceSuficent} from "@/lib/confidence";
+import {isConfidenceExcellent} from "@/lib/confidence";
 import {isDefined} from "@/lib/is-defined";
 import {matchQuestPhoto} from "@/lib/match-quest-photo";
 import {completedQuestsAtom} from "@/lib/storage";
@@ -70,7 +70,7 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
                   quest.id,
                   imageDataUrl,
                 );
-                if (isConfidenceSuficent(confidence)) {
+                if (isConfidenceExcellent(confidence)) {
                   setCompletedQuests((completedQuests) => [
                     ...completedQuests,
                     quest.id,

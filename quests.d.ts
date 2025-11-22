@@ -4,7 +4,6 @@ declare module "@/quests" {
     title: string;
     description: string;
     difficulty: "easy" | "medium" | "hard";
-    points: number;
     hint: string;
   }
   const quests: Quest[];
