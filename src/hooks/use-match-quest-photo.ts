@@ -37,7 +37,8 @@ export function useMatchQuestPhoto(questId?: number) {
       addToast({
         title: "Unexpected error",
         description:
-          "Something went wrong while processing your photo. Please try again.",
+          "Something went wrong while processing your photo. " +
+          "Please try again.",
         color: "danger",
       });
     }
