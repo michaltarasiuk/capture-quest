@@ -111,7 +111,7 @@ function Video({ref}: {ref: React.Ref<HTMLVideoElement>}) {
       {!isLoaded && <Skeleton className={cn("size-full")} />}
       <video
         ref={ref}
-        className={cn("z-50 size-full object-cover", {
+        className={cn("size-full object-cover", {
           hidden: !isLoaded,
         })}
         autoPlay
