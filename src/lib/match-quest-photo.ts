@@ -43,15 +43,11 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
               Rules:
               1. Look for things in the photo that match the quest description
               2. Think about what the quest really means, not just the exact words
-              3. Make sure the photo is a real picture taken with a camera
-              4. Reject screenshots from websites, social media posts, or downloaded images
-              5. Reject photos that are blurry, pixelated, or show poor image quality
-              6. Only accept photos that look like they were taken in the real world
               
               Give your answer:
-              - confidence: ${ConfidenceRanges.poor.join("-")} = doesn't match the quest OR looks like an internet screenshot/website
+              - confidence: ${ConfidenceRanges.poor.join("-")} = doesn't match the quest
               - confidence: ${ConfidenceRanges.partial.join("-")} = matches a little bit
-              - confidence: ${ConfidenceRanges.excellent.join("-")} = matches very well AND is clearly a real photo
+              - confidence: ${ConfidenceRanges.excellent.join("-")} = matches very well
               - reason: explain why in 1-2 sentences
               - hint: if it doesn't match well, say what's missing. If it matches well, say something nice
             `,
