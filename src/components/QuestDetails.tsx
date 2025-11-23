@@ -10,7 +10,6 @@ import {
 } from "@heroui/react";
 import {useSetAtom} from "jotai";
 import {AwardIcon} from "lucide-react";
-import useSound from "use-sound";
 
 import {useQuest} from "@/hooks/use-quest";
 import {cn} from "@/lib/cn";
@@ -26,7 +25,6 @@ import {Text} from "./Text";
 export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   const quest = useQuest();
   const setCompletedQuests = useSetAtom(completedQuestsAtom);
-  const [playSuccessSound] = useSound("/success.mp3");
   if (!isDefined(quest)) {
     return null;
   }
@@ -77,7 +75,6 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
                     description: `${reason} ${hint}`,
                     color: "success",
                   });
-                  playSuccessSound();
                 } else {
                   addToast({
                     title: "Photo did not match",
