@@ -1,12 +1,23 @@
 "use client";
 
-import {Card, CardBody, CardFooter, CardHeader, Skeleton} from "@heroui/react";
+import {
+  addToast,
+  Card,
+  CardBody,
+  CardFooter,
+  CardHeader,
+  Skeleton,
+} from "@heroui/react";
+import {useSetAtom} from "jotai";
 import {AwardIcon} from "lucide-react";
+import useSound from "use-sound";
 
-import {useMatchQuestPhoto} from "@/hooks/use-match-quest-photo";
 import {useQuest} from "@/hooks/use-quest";
 import {cn} from "@/lib/cn";
+import {isConfidenceExcellent} from "@/lib/confidence";
 import {isDefined} from "@/lib/is-defined";
+import {matchQuestPhoto} from "@/lib/match-quest-photo";
+import {completedQuestsAtom} from "@/lib/storage";
 
 import {CapturePhoto} from "./CapturePhoto";
 import {DifficultyChip} from "./DifficultyChip";
@@ -14,7 +25,8 @@ import {Text} from "./Text";
 
 export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   const quest = useQuest();
-  const matchQuestPhoto = useMatchQuestPhoto(quest?.id);
+  const setCompletedQuests = useSetAtom(completedQuestsAtom);
+  const [playSuccessSound] = useSound("/success.mp3");
   if (!isDefined(quest)) {
     return null;
   }
@@ -49,7 +61,40 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
         <CardFooter>
           <CapturePhoto
             isDisabled={quest.completed}
-            onCapture={matchQuestPhoto}
+            onCapture={async (imageDataUrl) => {
+              try {
+                const {confidence, reason, hint} = await matchQuestPhoto(
+                  quest.id,
+                  imageDataUrl,
+                );
+                if (isConfidenceExcellent(confidence)) {
+                  setCompletedQuests((completedQuests) => [
+                    ...completedQuests,
+                    quest.id,
+                  ]);
+                  addToast({
+                    title: "Quest completed",
+                    description: `${reason} ${hint}`,
+                    color: "success",
+                  });
+                  playSuccessSound();
+                } else {
+                  addToast({
+                    title: "Photo did not match",
+                    description: `${reason} ${hint}`,
+                    color: "danger",
+                  });
+                }
+              } catch {
+                addToast({
+                  title: "Unexpected error",
+                  description:
+                    "Something went wrong while processing your photo. " +
+                    "Please try again.",
+                  color: "danger",
+                });
+              }
+            }}
           />
         </CardFooter>
       </Card>
