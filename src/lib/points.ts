@@ -9,13 +9,13 @@ export function difficultyToPoints(d: Difficulty) {
   let points: number;
   switch (d) {
     case "easy":
-      points = 50;
-      break;
-    case "medium":
       points = 100;
       break;
-    case "hard":
+    case "medium":
       points = 150;
+      break;
+    case "hard":
+      points = 200;
       break;
     default:
       assertNever(d);
