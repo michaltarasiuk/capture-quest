@@ -8,10 +8,11 @@ import {SkeletonStats, Stats} from "@/components/Stats";
 import {cn} from "@/lib/cn";
 import {isMobile} from "@/lib/is-mobile";
 
+import {MobileQuestDetails} from "./MobileQuestDetails";
+
 export function QuestsView() {
-  const [detailsRef, isDetailsVisible, detailsEntry] = useIntersectionObserver({
-    threshold: 0.5,
-  });
+  const [detailsRef, isDetailsVisible, detailsEntry] =
+    useIntersectionObserver();
   return (
     <>
       <Stats />
@@ -25,6 +26,7 @@ export function QuestsView() {
         />
         <QuestDetails ref={detailsRef} />
       </div>
+      {!isDetailsVisible && <MobileQuestDetails />}
     </>
   );
 }

@@ -1,51 +1,26 @@
 "use client";
 
-import {
-  addToast,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Skeleton,
-} from "@heroui/react";
-import {useSetAtom} from "jotai";
-import {AwardIcon} from "lucide-react";
+import {Card, CardBody, CardFooter, Skeleton} from "@heroui/react";
 
 import {useQuest} from "@/hooks/use-quest";
+import {useQuestCapture} from "@/hooks/use-quest-capture";
 import {cn} from "@/lib/cn";
-import {isConfidenceExcellent} from "@/lib/confidence";
 import {isDefined} from "@/lib/is-defined";
-import {matchQuestPhoto} from "@/lib/match-quest-photo";
-import {completedQuestsAtom} from "@/lib/storage";
 
 import {CapturePhoto} from "./CapturePhoto";
-import {DifficultyChip} from "./DifficultyChip";
+import {QuestHeader} from "./QuestHeader";
 import {Text} from "./Text";
 
 export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   const quest = useQuest();
-  const setCompletedQuests = useSetAtom(completedQuestsAtom);
+  const capture = useQuestCapture();
   if (!isDefined(quest)) {
     return null;
   }
   return (
     <div ref={ref} className={cn("order-first", "lg:order-none")}>
       <Card className={cn("sticky top-3")}>
-        <CardHeader className={cn("flex justify-between")}>
-          <h2
-            className={cn("flex items-center text-lg font-semibold uppercase")}>
-            {quest.title}
-            {quest.completed && (
-              <AwardIcon
-                className={cn(
-                  "ms-1 size-5 stroke-emerald-500",
-                  "dark:stroke-emerald-400",
-                )}
-              />
-            )}
-          </h2>
-          <DifficultyChip difficulty={quest.difficulty} />
-        </CardHeader>
+        <QuestHeader {...quest} />
         <CardBody className={cn("space-y-3")}>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Description</h3>
@@ -59,39 +34,7 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
         <CardFooter>
           <CapturePhoto
             isDisabled={quest.completed}
-            onCapture={async (imageDataUrl) => {
-              try {
-                const {confidence, reason, hint} = await matchQuestPhoto(
-                  quest.id,
-                  imageDataUrl,
-                );
-                if (isConfidenceExcellent(confidence)) {
-                  setCompletedQuests((completedQuests) => [
-                    ...completedQuests,
-                    quest.id,
-                  ]);
-                  addToast({
-                    title: "Quest completed",
-                    description: `${reason} ${hint}`,
-                    color: "success",
-                  });
-                } else {
-                  addToast({
-                    title: "Photo did not match",
-                    description: `${reason} ${hint}`,
-                    color: "danger",
-                  });
-                }
-              } catch {
-                addToast({
-                  title: "Unexpected error",
-                  description:
-                    "Something went wrong while processing your photo. " +
-                    "Please try again.",
-                  color: "danger",
-                });
-              }
-            }}
+            onCapture={(imageDataUrl) => capture(quest.id, imageDataUrl)}
           />
         </CardFooter>
       </Card>
