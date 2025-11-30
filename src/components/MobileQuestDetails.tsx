@@ -22,7 +22,11 @@ export function MobileQuestDetails() {
         "fixed start-0 bottom-0 z-50 w-full rounded-b-none",
         "animate-in slide-in-from-bottom duration-300",
       )}>
-      <QuestHeader {...quest} />
+      <QuestHeader
+        title={quest.title}
+        difficulty={quest.difficulty}
+        completed={quest.completed}
+      />
       <CardFooter>
         <CapturePhoto
           isDisabled={quest.completed}

@@ -20,7 +20,11 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   return (
     <div ref={ref} className={cn("order-first", "lg:order-none")}>
       <Card className={cn("sticky top-3")}>
-        <QuestHeader {...quest} />
+        <QuestHeader
+          title={quest.title}
+          difficulty={quest.difficulty}
+          completed={quest.completed}
+        />
         <CardBody className={cn("space-y-3")}>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Description</h3>
