@@ -16,7 +16,11 @@ export function QuestsView() {
   return (
     <>
       <Stats />
-      <div className={cn("grid grid-cols-1 gap-4", "lg:grid-cols-3")}>
+      <div
+        className={cn(
+          "grid grid-cols-1 gap-4 pb-22",
+          "lg:grid-cols-3 lg:pb-0",
+        )}>
         <QuestList
           onNavigate={() => {
             if (isMobile() && !isDetailsVisible) {
