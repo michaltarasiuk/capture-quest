@@ -6,7 +6,7 @@ import {QuestDetails, SkeletonQuestDetails} from "@/components/QuestDetails";
 import {QuestList, SkeletonQuestList} from "@/components/QuestList";
 import {SkeletonStats, Stats} from "@/components/Stats";
 import {cn} from "@/lib/cn";
-import {isMobile} from "@/lib/is-mobile";
+import {isMobile} from "@/lib/media";
 
 import {MobileQuestDetails} from "./MobileQuestDetails";
 
