@@ -1,5 +1,3 @@
-"use client";
-
 import {addToast} from "@heroui/react";
 import {useSetAtom} from "jotai";
 

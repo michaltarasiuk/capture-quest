@@ -1,5 +1,3 @@
-"use client";
-
 import {Chip, type ChipProps} from "@heroui/react";
 
 import {assertNever} from "@/lib/assert-never";

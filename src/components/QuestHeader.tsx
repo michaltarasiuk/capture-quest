@@ -1,5 +1,3 @@
-"use client";
-
 import {CardHeader} from "@heroui/react";
 import {AwardIcon} from "lucide-react";
 
