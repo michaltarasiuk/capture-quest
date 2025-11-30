@@ -17,18 +17,13 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   if (!isDefined(quest)) {
     return null;
   }
-  const headerProps = {
-    title: quest.title,
-    difficulty: quest.difficulty,
-    completed: quest.completed,
-  };
   return (
     <div ref={ref} className={cn("order-first", "lg:order-none")}>
       <Card className={cn("sticky top-3")}>
         <QuestHeader
-          title={headerProps.title}
-          difficulty={headerProps.difficulty}
-          completed={headerProps.completed}
+          title={quest.title}
+          difficulty={quest.difficulty}
+          completed={quest.completed}
         />
         <CardBody className={cn("space-y-3")}>
           <div>
