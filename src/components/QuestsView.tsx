@@ -20,7 +20,7 @@ export function QuestsView() {
         <QuestList
           onNavigate={() => {
             if (isMobile() && !isDetailsVisible) {
-              detailsEntry!.target.scrollIntoView();
+              detailsEntry?.target.scrollIntoView();
             }
           }}
         />
