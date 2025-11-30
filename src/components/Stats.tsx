@@ -24,25 +24,27 @@ export function Stats() {
         "sm:grid-cols-2",
         "md:grid-cols-3",
       )}>
-      <Card>
-        <CardBody className={cn("space-y-2")}>
-          <StatHeading>{count}</StatHeading>
-          <Text>Quests Completed</Text>
-        </CardBody>
-      </Card>
-      <Card>
-        <CardBody className={cn("space-y-2")}>
-          <StatHeading>{points}</StatHeading>
-          <Text>Total Points</Text>
-        </CardBody>
-      </Card>
-      <Card>
-        <CardBody className={cn("space-y-2")}>
-          <StatHeading variant="violet">{percentage}</StatHeading>
-          <Text>Progress</Text>
-        </CardBody>
-      </Card>
+      <StatCard>
+        <StatHeading>{count}</StatHeading>
+        <Text>Quests Completed</Text>
+      </StatCard>
+      <StatCard>
+        <StatHeading>{points}</StatHeading>
+        <Text>Total Points</Text>
+      </StatCard>
+      <StatCard>
+        <StatHeading variant="violet">{percentage}</StatHeading>
+        <Text>Progress</Text>
+      </StatCard>
     </div>
+  );
+}
+
+function StatCard({children}: {children: React.ReactNode}) {
+  return (
+    <Card>
+      <CardBody className={cn("space-y-2")}>{children}</CardBody>
+    </Card>
   );
 }
 
