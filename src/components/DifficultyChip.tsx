@@ -2,10 +2,7 @@ import {Chip, type ChipProps} from "@heroui/react";
 
 import {assertNever} from "@/lib/assert-never";
 import {capitalize} from "@/lib/capitalize";
-import type quests from "@/quests";
-
-type Quest = (typeof quests)[number];
-type Difficulty = Quest["difficulty"];
+import type {Difficulty} from "@/lib/difficulty";
 
 export function DifficultyChip({difficulty}: {difficulty: Difficulty}) {
   let color: ChipProps["color"];

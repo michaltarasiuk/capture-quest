@@ -3,13 +3,10 @@ import {AwardIcon} from "lucide-react";
 
 import {useQuestId} from "@/hooks/use-quest-id";
 import {cn} from "@/lib/cn";
-import type quests from "@/quests";
+import type {Difficulty} from "@/lib/difficulty";
 
 import {DifficultyChip} from "./DifficultyChip";
 import {Text} from "./Text";
-
-type Quest = (typeof quests)[number];
-type Difficulty = Quest["difficulty"];
 
 interface QuestCardProps {
   id: number;

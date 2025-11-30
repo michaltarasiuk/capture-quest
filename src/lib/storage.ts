@@ -3,8 +3,8 @@ import {atomWithStorage} from "jotai/utils";
 
 import quests from "@/quests";
 
+import {difficultyToPoints} from "./difficulty";
 import {percentage} from "./percentage";
-import {difficultyToPoints} from "./points";
 
 export const completedQuestsAtom = atomWithStorage<number[]>(
   "completed_quests",
