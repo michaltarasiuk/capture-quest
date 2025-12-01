@@ -2,6 +2,7 @@
 
 import {Button} from "@heroui/react";
 import {CameraIcon} from "lucide-react";
+import dynamic from "next/dynamic";
 import {useTransition} from "react";
 import {FocusScope} from "react-aria";
 import {createPortal} from "react-dom";
@@ -9,7 +10,9 @@ import {createPortal} from "react-dom";
 import {useVideoStream} from "@/hooks/use-video-stream";
 import {isDefined} from "@/lib/is-defined";
 
-import {Camera} from "./Camera";
+const Camera = dynamic(() => import("./Camera").then((m) => m.Camera), {
+  ssr: false,
+});
 
 interface CapturePhotoProps {
   isDisabled: boolean;

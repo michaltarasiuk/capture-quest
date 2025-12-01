@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {useIntersectionObserver} from "usehooks-ts";
 
 import {QuestDetails, SkeletonQuestDetails} from "@/components/QuestDetails";
@@ -8,7 +9,10 @@ import {SkeletonStats, Stats} from "@/components/Stats";
 import {cn} from "@/lib/cn";
 import {isMobile} from "@/lib/media";
 
-import {MobileQuestDetails} from "./MobileQuestDetails";
+const MobileQuestDetails = dynamic(
+  () => import("./MobileQuestDetails").then((m) => m.MobileQuestDetails),
+  {ssr: false},
+);
 
 export function QuestsView() {
   const [detailsRef, isDetailsVisible, detailsEntry] =
