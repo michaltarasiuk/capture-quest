@@ -1,5 +1,10 @@
 import {atom} from "jotai";
-import {atomWithStorage} from "jotai/utils";
+import {
+  atomWithStorage,
+  createJSONStorage,
+  unstable_withStorageValidator as withStorageValidator,
+} from "jotai/utils";
+import * as z from "zod";
 
 import quests from "@/quests";
 
@@ -9,7 +14,7 @@ import {percentage} from "./percentage";
 export const completedQuestsAtom = atomWithStorage<number[]>(
   "completed_quests",
   [],
-  undefined,
+  withStorageValidator(isQuestIdArray)(createJSONStorage()),
   {getOnInit: true},
 );
 
@@ -30,3 +35,7 @@ export const completedQuestsPointsAtom = atom((get) => {
     .map((q) => difficultyToPoints(q.difficulty))
     .reduce((a, b) => a + b, 0);
 });
+
+function isQuestIdArray(v: unknown): v is number[] {
+  return z.array(z.number()).safeParse(v).success;
+}
