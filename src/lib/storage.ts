@@ -11,7 +11,7 @@ import quests from "@/quests";
 import {difficultyToPoints} from "./difficulty";
 import {percentage} from "./percentage";
 
-export const completedQuestsAtom = atomWithStorage<number[]>(
+export const completedQuestsAtom = atomWithStorage(
   "completed_quests",
   [],
   withStorageValidator(isQuestIdArray)(createJSONStorage()),
