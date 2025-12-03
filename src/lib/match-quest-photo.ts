@@ -34,12 +34,12 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
             type: "text",
             text: dedent`
               You check photos for a quest game. Look at this photo and decide if it matches the quest.
-              
+
               Quest:
               - Title: ${quest.title}
               - Description: ${quest.description}
               - Hint: ${quest.hint}
-              
+
               Rules:
               1. Look for things in the photo that match the quest description
               2. Think about what the quest really means, not just the exact words
@@ -47,7 +47,7 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
               4. Reject screenshots from websites, social media posts, or downloaded images
               5. Reject photos that are blurry, pixelated, or show poor image quality
               6. Only accept photos that look like they were taken in the real world
-              
+
               Give your answer:
               - confidence: ${ConfidenceRanges.poor.join("-")} = doesn't match the quest OR looks like an internet screenshot/website
               - confidence: ${ConfidenceRanges.partial.join("-")} = matches a little bit
