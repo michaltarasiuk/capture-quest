@@ -1,8 +1,8 @@
 import {CardHeader} from "@heroui/react";
 import {AwardIcon} from "lucide-react";
 
-import {cn} from "@/lib/cn";
-import type {Difficulty} from "@/lib/difficulty";
+import {cn} from "#app/lib/cn";
+import type {Difficulty} from "#app/lib/difficulty";
 
 import {DifficultyChip} from "./DifficultyChip";
 

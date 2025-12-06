@@ -6,7 +6,7 @@ import {
 } from "jotai/utils";
 import * as z from "zod";
 
-import quests from "@/quests";
+import quests from "#quests";
 
 import {difficultyToPoints} from "./difficulty";
 import {percentage} from "./percentage";

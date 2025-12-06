@@ -1,4 +1,4 @@
-declare module "@/quests" {
+declare module "#quests" {
   interface Quest {
     id: number;
     title: string;

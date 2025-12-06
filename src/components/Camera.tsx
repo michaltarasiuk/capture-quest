@@ -3,9 +3,9 @@ import {CircleIcon, XIcon} from "lucide-react";
 import {useEffect, useRef, useState} from "react";
 import {useScrollLock} from "usehooks-ts";
 
-import {useEscapeDown} from "@/hooks/use-escape-down";
-import {cn} from "@/lib/cn";
-import {isDefined} from "@/lib/is-defined";
+import {useEscapeDown} from "#app/hooks/use-escape-down";
+import {cn} from "#app/lib/cn";
+import {isDefined} from "#app/lib/is-defined";
 
 interface CameraProps {
   stream: MediaStream;

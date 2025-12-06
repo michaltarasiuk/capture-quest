@@ -1,6 +1,6 @@
 "use client";
 
-import {useIsClient} from "@/hooks/use-is-client";
+import {useIsClient} from "#app/hooks/use-is-client";
 
 interface ClientGateProps {
   fallback: React.ReactNode;

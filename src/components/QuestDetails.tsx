@@ -2,10 +2,10 @@
 
 import {Card, CardBody, CardFooter, Skeleton} from "@heroui/react";
 
-import {useQuest} from "@/hooks/use-quest";
-import {useQuestCapture} from "@/hooks/use-quest-capture";
-import {cn} from "@/lib/cn";
-import {isDefined} from "@/lib/is-defined";
+import {useQuest} from "#app/hooks/use-quest";
+import {useQuestCapture} from "#app/hooks/use-quest-capture";
+import {cn} from "#app/lib/cn";
+import {isDefined} from "#app/lib/is-defined";
 
 import {CapturePhoto} from "./CapturePhoto";
 import {QuestHeader} from "./QuestHeader";

@@ -14,8 +14,8 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@/quests": ["./quests.json"]
+      "#app/*": ["./src/*"],
+      "#quests": ["./quests.json"]
     },
     "plugins": [{"name": "next"}],
     "noEmit": true,

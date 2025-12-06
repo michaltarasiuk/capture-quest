@@ -1,4 +1,4 @@
-import type quests from "@/quests";
+import type quests from "#quests";
 
 import {assertNever} from "./assert-never";
 

@@ -4,12 +4,12 @@ import {Card, CardBody, Skeleton} from "@heroui/react";
 import {cva, type VariantProps} from "cva";
 import {useAtomValue} from "jotai";
 
-import {cn} from "@/lib/cn";
+import {cn} from "#app/lib/cn";
 import {
   completedQuestsCountAtom,
   completedQuestsPercentageAtom,
   completedQuestsPointsAtom,
-} from "@/lib/storage";
+} from "#app/lib/storage";
 
 import {Text} from "./Text";
 

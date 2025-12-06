@@ -1,9 +1,9 @@
 import {addToast} from "@heroui/react";
 import {useSetAtom} from "jotai";
 
-import {isConfidenceExcellent} from "@/lib/confidence";
-import {matchQuestPhoto} from "@/lib/match-quest-photo";
-import {completedQuestsAtom} from "@/lib/storage";
+import {isConfidenceExcellent} from "#app/lib/confidence";
+import {matchQuestPhoto} from "#app/lib/match-quest-photo";
+import {completedQuestsAtom} from "#app/lib/storage";
 
 export function useQuestCapture() {
   const setCompletedQuests = useSetAtom(completedQuestsAtom);

@@ -3,11 +3,11 @@
 import dynamic from "next/dynamic";
 import {useIntersectionObserver} from "usehooks-ts";
 
-import {QuestDetails, SkeletonQuestDetails} from "@/components/QuestDetails";
-import {QuestList, SkeletonQuestList} from "@/components/QuestList";
-import {SkeletonStats, Stats} from "@/components/Stats";
-import {cn} from "@/lib/cn";
-import {isMobile} from "@/lib/media";
+import {QuestDetails, SkeletonQuestDetails} from "#app/components/QuestDetails";
+import {QuestList, SkeletonQuestList} from "#app/components/QuestList";
+import {SkeletonStats, Stats} from "#app/components/Stats";
+import {cn} from "#app/lib/cn";
+import {isMobile} from "#app/lib/media";
 
 const MobileQuestDetails = dynamic(
   () => import("./MobileQuestDetails").then((m) => m.MobileQuestDetails),

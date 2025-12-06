@@ -1,9 +1,9 @@
 import {Card, CardBody, Skeleton} from "@heroui/react";
 import {AwardIcon} from "lucide-react";
 
-import {useQuestId} from "@/hooks/use-quest-id";
-import {cn} from "@/lib/cn";
-import type {Difficulty} from "@/lib/difficulty";
+import {useQuestId} from "#app/hooks/use-quest-id";
+import {cn} from "#app/lib/cn";
+import type {Difficulty} from "#app/lib/difficulty";
 
 import {DifficultyChip} from "./DifficultyChip";
 import {Text} from "./Text";

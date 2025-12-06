@@ -1,8 +1,8 @@
 "use client";
 
-import {ClientGate} from "@/components/ClientGate";
-import {QuestsView, SkeletonQuestsView} from "@/components/QuestsView";
-import {cn} from "@/lib/cn";
+import {ClientGate} from "#app/components/ClientGate";
+import {QuestsView, SkeletonQuestsView} from "#app/components/QuestsView";
+import {cn} from "#app/lib/cn";
 
 export default function Page() {
   return (

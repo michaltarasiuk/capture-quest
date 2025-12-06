@@ -1,6 +1,6 @@
 import {useSyncExternalStore} from "react";
 
-import {getMobileMedia} from "@/lib/media";
+import {getMobileMedia} from "#app/lib/media";
 
 export function useIsMobile() {
   const isMobile = useSyncExternalStore(

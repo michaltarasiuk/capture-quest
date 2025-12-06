@@ -1,9 +1,9 @@
 import {useAtomValue} from "jotai";
 import {useSearchParams} from "next/navigation";
 
-import {isDefined} from "@/lib/is-defined";
-import {completedQuestsAtom} from "@/lib/storage";
-import quests from "@/quests";
+import {isDefined} from "#app/lib/is-defined";
+import {completedQuestsAtom} from "#app/lib/storage";
+import quests from "#quests";
 
 export function useQuestId() {
   const questIdParam = useSearchParams().get("id");

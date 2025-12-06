@@ -1,8 +1,8 @@
 import {useAtomValue} from "jotai";
 
-import {isDefined} from "@/lib/is-defined";
-import {completedQuestsAtom} from "@/lib/storage";
-import quests from "@/quests";
+import {isDefined} from "#app/lib/is-defined";
+import {completedQuestsAtom} from "#app/lib/storage";
+import quests from "#quests";
 
 import {useQuestId} from "./use-quest-id";
 

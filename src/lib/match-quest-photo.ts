@@ -6,7 +6,7 @@ import dedent from "dedent";
 import invariant from "tiny-invariant";
 import * as z from "zod";
 
-import quests from "@/quests";
+import quests from "#quests";
 
 import {ConfidenceRanges, getConfidenceRange} from "./confidence";
 import {isDefined} from "./is-defined";

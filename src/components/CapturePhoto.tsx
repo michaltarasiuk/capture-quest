@@ -6,8 +6,8 @@ import {useTransition} from "react";
 import {FocusScope} from "react-aria";
 import {createPortal} from "react-dom";
 
-import {useVideoStream} from "@/hooks/use-video-stream";
-import {isDefined} from "@/lib/is-defined";
+import {useVideoStream} from "#app/hooks/use-video-stream";
+import {isDefined} from "#app/lib/is-defined";
 
 import {Camera} from "./Camera";
 

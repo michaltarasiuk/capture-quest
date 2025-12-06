@@ -1,7 +1,7 @@
 import {addToast} from "@heroui/react";
 import {useState} from "react";
 
-import {isDefined} from "@/lib/is-defined";
+import {isDefined} from "#app/lib/is-defined";
 
 export function useVideoStream() {
   const [stream, setStream] = useState<MediaStream | null>(null);

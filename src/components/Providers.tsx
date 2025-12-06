@@ -4,8 +4,8 @@ import {HeroUIProvider, ToastProvider} from "@heroui/react";
 import {Provider as JotaiProvider} from "jotai";
 import {ThemeProvider} from "next-themes";
 
-import {useIsMobile} from "@/hooks/use-is-mobile";
-import {cn} from "@/lib/cn";
+import {useIsMobile} from "#app/hooks/use-is-mobile";
+import {cn} from "#app/lib/cn";
 
 export function Providers({children}: {children: React.ReactNode}) {
   const isMobile = useIsMobile();

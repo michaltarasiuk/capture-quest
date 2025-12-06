@@ -1,7 +1,7 @@
 import type {NextConfig} from "next";
 import invariant from "tiny-invariant";
 
-import {isDefined} from "@/lib/is-defined";
+import {isDefined} from "#app/lib/is-defined";
 
 const nextConfig: NextConfig = {
   reactCompiler: true,
