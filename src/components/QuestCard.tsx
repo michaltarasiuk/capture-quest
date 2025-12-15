@@ -3,7 +3,7 @@ import {AwardIcon} from "lucide-react";
 
 import {useQuestId} from "#app/hooks/use-quest-id";
 import {cn} from "#app/lib/cn";
-import type {Difficulty} from "#app/lib/difficulty";
+import type {Difficulty} from "#app/lib/points";
 
 import {DifficultyChip} from "./DifficultyChip";
 import {Text} from "./Text";

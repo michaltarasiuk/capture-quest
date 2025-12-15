@@ -8,8 +8,8 @@ import * as z from "zod";
 
 import quests from "#quests";
 
-import {difficultyToPoints} from "./difficulty";
 import {percentage} from "./percentage";
+import {difficultyToPoints} from "./points";
 
 export const completedQuestsAtom = atomWithStorage(
   "completed_quests",
