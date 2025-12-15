@@ -3,7 +3,7 @@ import {CircleIcon, XIcon} from "lucide-react";
 import {useEffect, useRef, useState} from "react";
 import {useScrollLock} from "usehooks-ts";
 
-import {useEscapeDown} from "#app/hooks/use-escape-down";
+import {useEscapeKey} from "#app/hooks/use-escape-key";
 import {cn} from "#app/lib/cn";
 import {isDefined} from "#app/lib/is-defined";
 
@@ -22,7 +22,7 @@ export function Camera({stream, onCapture, onClose}: CameraProps) {
     }
   }, [stream]);
   useScrollLock();
-  useEscapeDown(onClose);
+  useEscapeKey(onClose);
   async function capturePhoto() {
     if (isDefined(videoRef.current) && isDefined(canvasRef.current)) {
       const video = videoRef.current;
