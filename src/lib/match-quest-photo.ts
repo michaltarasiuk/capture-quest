@@ -8,14 +8,14 @@ import * as z from "zod";
 
 import {confidenceRanges, getConfidenceRange} from "./confidence";
 import {isDefined} from "./is-defined";
-import {quests} from "./quests";
+import {getQuestById} from "./quests";
 
 const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,
 });
 
 export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
-  const quest = quests.find((q) => q.id === questId);
+  const quest = getQuestById(questId);
   invariant(isDefined(quest), `Quest with id ${questId} not found`);
   const [confidenceMin, confidenceMax] = getConfidenceRange();
   const {object} = await generateObject({

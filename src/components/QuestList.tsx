@@ -1,20 +1,17 @@
-import {useAtomValue} from "jotai";
-
 import {useQuestNavigation} from "#app/hooks/use-quest-navigation";
+import {useQuests} from "#app/hooks/use-quests";
 import {cn} from "#app/lib/cn";
 import {quests} from "#app/lib/quests";
-import {completedQuestsAtom} from "#app/lib/storage";
 
 import {QuestCard, SkeletonOrderCard} from "./QuestCard";
 
 export function QuestList({onNavigate}: {onNavigate: () => void}) {
-  const completedQuests = useAtomValue(completedQuestsAtom);
+  const quests = useQuests();
   const navigateToQuest = useQuestNavigation();
   return (
     <ul className={cn("space-y-3", "lg:col-span-2")}>
       {quests
-        .map((q) => ({...q, completed: completedQuests.includes(q.id)}))
-        .sort((a, b) => Number(a.completed) - Number(b.completed))
+        .toSorted((a, b) => Number(a.completed) - Number(b.completed))
         .map((q) => (
           <li key={q.id}>
             <QuestCard

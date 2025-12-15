@@ -1,6 +1,6 @@
 import * as z from "zod";
 
-import questsData from "#quests";
+import data from "#quests";
 
 import {assertNever} from "./assert-never";
 
@@ -15,7 +15,11 @@ const QuestSchema = z.object({
   hint: z.string(),
 });
 
-export const quests = questsData.map((q) => QuestSchema.parse(q));
+export const quests = data.map((q) => QuestSchema.parse(q));
+
+export function getQuestById(id: number) {
+  return quests.find((q) => q.id === id);
+}
 
 export function difficultyToPoints(d: Difficulty) {
   let points: number;
