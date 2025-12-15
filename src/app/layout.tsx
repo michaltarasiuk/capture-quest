@@ -8,8 +8,6 @@ import {geistMono, geistSans} from "#app/lib/fonts";
 
 export const metadata: Metadata = {
   title: "Capture Quest - Photo Quest Challenges",
-  description:
-    "Capture Quest is a photo challenge app with rotating quests, streaks, and leaderboards to motivate creative photography.",
 };
 
 export default function Layout({children}: LayoutProps<"/">) {

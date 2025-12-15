@@ -6,10 +6,9 @@ import dedent from "dedent";
 import invariant from "tiny-invariant";
 import * as z from "zod";
 
-import quests from "#quests";
-
 import {confidenceRanges, getConfidenceRange} from "./confidence";
 import {isDefined} from "./is-defined";
+import {quests} from "./quests";
 
 const groq = createGroq({
   apiKey: process.env.GROQ_API_KEY,

@@ -1,9 +1,21 @@
-import type quests from "#quests";
+import * as z from "zod";
+
+import questsData from "#quests";
 
 import {assertNever} from "./assert-never";
 
-export type Quest = (typeof quests)[number];
+export type Quest = z.infer<typeof QuestSchema>;
 export type Difficulty = Quest["difficulty"];
+
+const QuestSchema = z.object({
+  id: z.number(),
+  title: z.string(),
+  description: z.string(),
+  difficulty: z.enum(["easy", "medium", "hard"]),
+  hint: z.string(),
+});
+
+export const quests = questsData.map((q) => QuestSchema.parse(q));
 
 export function difficultyToPoints(d: Difficulty) {
   let points: number;

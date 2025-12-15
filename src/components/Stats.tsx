@@ -1,6 +1,6 @@
 "use client";
 
-import {Card, CardBody, Skeleton} from "@heroui/react";
+import {CardBody, Skeleton} from "@heroui/react";
 import {cva, type VariantProps} from "cva";
 import {useAtomValue} from "jotai";
 
@@ -11,6 +11,7 @@ import {
   completedQuestsPointsAtom,
 } from "#app/lib/storage";
 
+import {Card} from "./Card";
 import {Text} from "./Text";
 
 export function Stats() {

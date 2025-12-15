@@ -6,10 +6,8 @@ import {
 } from "jotai/utils";
 import * as z from "zod";
 
-import quests from "#quests";
-
 import {percentage} from "./percentage";
-import {difficultyToPoints} from "./points";
+import {difficultyToPoints, quests} from "./quests";
 
 export const completedQuestsAtom = atomWithStorage(
   "completed_quests",

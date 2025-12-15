@@ -1,19 +1,16 @@
-import {Card, CardBody, Skeleton} from "@heroui/react";
+import {CardBody, Skeleton} from "@heroui/react";
 import {AwardIcon} from "lucide-react";
-import {useTheme} from "next-themes";
 
 import {useQuestId} from "#app/hooks/use-quest-id";
 import {cn} from "#app/lib/cn";
-import type {Difficulty} from "#app/lib/points";
+import type {Quest} from "#app/lib/quests";
 
+import {Card} from "./Card";
 import {DifficultyChip} from "./DifficultyChip";
 import {Text} from "./Text";
 
-interface QuestCardProps {
-  id: number;
-  title: string;
-  description: string;
-  difficulty: Difficulty;
+interface QuestCardProps
+  extends Pick<Quest, "id" | "title" | "description" | "difficulty"> {
   completed: boolean;
   onPress: () => void;
 }
@@ -27,12 +24,10 @@ export function QuestCard({
   onPress,
 }: QuestCardProps) {
   const questId = useQuestId();
-  const {resolvedTheme} = useTheme();
   return (
     <Card
       isPressable={!completed}
       isDisabled={completed}
-      shadow={resolvedTheme === "dark" ? "none" : "md"}
       className={cn("border-2 border-transparent", {
         "border-focus": id === questId,
       })}

@@ -2,13 +2,11 @@ import {CardHeader} from "@heroui/react";
 import {AwardIcon} from "lucide-react";
 
 import {cn} from "#app/lib/cn";
-import type {Difficulty} from "#app/lib/points";
+import type {Quest} from "#app/lib/quests";
 
 import {DifficultyChip} from "./DifficultyChip";
 
-interface QuestHeaderProps {
-  title: string;
-  difficulty: Difficulty;
+interface QuestHeaderProps extends Pick<Quest, "title" | "difficulty"> {
   completed: boolean;
 }
 

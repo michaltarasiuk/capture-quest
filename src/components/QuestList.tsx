@@ -2,8 +2,8 @@ import {useAtomValue} from "jotai";
 
 import {useQuestNavigation} from "#app/hooks/use-quest-navigation";
 import {cn} from "#app/lib/cn";
+import {quests} from "#app/lib/quests";
 import {completedQuestsAtom} from "#app/lib/storage";
-import quests from "#quests";
 
 import {QuestCard, SkeletonOrderCard} from "./QuestCard";
 
