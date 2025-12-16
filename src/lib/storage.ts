@@ -25,8 +25,8 @@ export const completedQuestsAtom = atom(
 );
 
 export const completedQuestsCountAtom = atom((get) => {
-  const completed = get(completedQuestsAtom);
-  return completed.size;
+  const completedQuests = get(completedQuestsAtom);
+  return completedQuests.size;
 });
 
 export const completedQuestsPercentageAtom = atom((get) => {
@@ -35,9 +35,9 @@ export const completedQuestsPercentageAtom = atom((get) => {
 });
 
 export const completedQuestsPointsAtom = atom((get) => {
-  const completed = get(completedQuestsAtom);
+  const completedQuests = get(completedQuestsAtom);
   return quests
-    .filter((q) => completed.has(q.id))
+    .filter((q) => completedQuests.has(q.id))
     .map((q) => difficultyToPoints(q.difficulty))
     .reduce((a, b) => a + b, 0);
 });
