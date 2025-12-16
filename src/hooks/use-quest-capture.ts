@@ -7,14 +7,14 @@ import {completedQuestsAtom} from "#app/lib/storage";
 
 export function useQuestCapture() {
   const setCompletedQuests = useSetAtom(completedQuestsAtom);
-  async function captureQuest(questId: number, imageDataUrl: string) {
+  return async function captureQuest(questId: number, imageDataUrl: string) {
     try {
       const {confidence, reason, hint} = await matchQuestPhoto(
         questId,
         imageDataUrl,
       );
       if (isConfidenceExcellent(confidence)) {
-        setCompletedQuests((completedQuests) => [...completedQuests, questId]);
+        setCompletedQuests((completedQuests) => completedQuests.add(questId));
         addToast({
           title: "Quest completed",
           description: `${reason} ${hint}`,
@@ -36,6 +36,5 @@ export function useQuestCapture() {
         color: "danger",
       });
     }
-  }
-  return captureQuest;
+  };
 }

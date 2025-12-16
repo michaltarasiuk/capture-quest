@@ -9,16 +9,24 @@ import * as z from "zod";
 import {percentage} from "./percentage";
 import {difficultyToPoints, quests} from "./quests";
 
-export const completedQuestsAtom = atomWithStorage(
+const completedQuestsStorageAtom = atomWithStorage(
   "completed_quests",
   [],
   withStorageValidator(isQuestIdArray)(createJSONStorage()),
   {getOnInit: true},
 );
 
+export const completedQuestsAtom = atom(
+  (get) => new Set(get(completedQuestsStorageAtom)),
+  (get, set, update: <T extends Set<number>>(completedQuests: T) => T) => {
+    const completedQuests = get(completedQuestsAtom);
+    set(completedQuestsStorageAtom, [...update(completedQuests)]);
+  },
+);
+
 export const completedQuestsCountAtom = atom((get) => {
   const completed = get(completedQuestsAtom);
-  return completed.length;
+  return completed.size;
 });
 
 export const completedQuestsPercentageAtom = atom((get) => {
@@ -29,7 +37,7 @@ export const completedQuestsPercentageAtom = atom((get) => {
 export const completedQuestsPointsAtom = atom((get) => {
   const completed = get(completedQuestsAtom);
   return quests
-    .filter((q) => completed.includes(q.id))
+    .filter((q) => completed.has(q.id))
     .map((q) => difficultyToPoints(q.difficulty))
     .reduce((a, b) => a + b, 0);
 });
