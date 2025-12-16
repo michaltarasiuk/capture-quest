@@ -10,5 +10,5 @@ export function useIsClient() {
 }
 
 function subscribe() {
-  return function () {};
+  return () => {};
 }
