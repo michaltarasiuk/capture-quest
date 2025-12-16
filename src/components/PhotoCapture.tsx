@@ -11,12 +11,12 @@ import {isDefined} from "#app/lib/is-defined";
 
 import {Camera} from "./Camera";
 
-interface CapturePhotoProps {
+interface PhotoCaptureProps {
   isDisabled: boolean;
   onCapture: (imageDataUrl: string) => void;
 }
 
-export function CapturePhoto({isDisabled, onCapture}: CapturePhotoProps) {
+export function PhotoCapture({isDisabled, onCapture}: PhotoCaptureProps) {
   const {stream, startStream, stopStream} = useVideoStream();
   const [isPending, startTransition] = useTransition();
   return (

@@ -3,16 +3,14 @@
 import {Card, CardFooter} from "@heroui/react";
 
 import {useQuest} from "#app/hooks/use-quest";
-import {useQuestCapture} from "#app/hooks/use-quest-capture";
 import {cn} from "#app/lib/cn";
 import {isDefined} from "#app/lib/is-defined";
 
-import {CapturePhoto} from "./CapturePhoto";
 import {QuestHeader} from "./QuestHeader";
+import {QuestPhotoCapture} from "./QuestPhotoCapture";
 
 export function MobileQuestDetails() {
   const quest = useQuest();
-  const capture = useQuestCapture();
   if (!isDefined(quest)) {
     return null;
   }
@@ -28,10 +26,7 @@ export function MobileQuestDetails() {
         completed={quest.completed}
       />
       <CardFooter>
-        <CapturePhoto
-          isDisabled={quest.completed}
-          onCapture={(imageDataUrl) => capture(quest.id, imageDataUrl)}
-        />
+        <QuestPhotoCapture />
       </CardFooter>
     </Card>
   );
