@@ -1,15 +1,15 @@
 export function isConfidenceExcellent(c: number) {
-  const [min] = confidenceRanges.excellent;
+  const [min] = CONFIDENCE_RANGES.excellent;
   return c >= min;
 }
 
 export function getConfidenceRange() {
-  const [min] = confidenceRanges.poor;
-  const [, max] = confidenceRanges.excellent;
+  const [min] = CONFIDENCE_RANGES.poor;
+  const [, max] = CONFIDENCE_RANGES.excellent;
   return [min, max] as const;
 }
 
-export const confidenceRanges = {
+export const CONFIDENCE_RANGES = {
   poor: [0, 0.4],
   partial: [0.5, 0.7],
   excellent: [0.8, 1.0],

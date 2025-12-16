@@ -6,7 +6,7 @@ import dedent from "dedent";
 import invariant from "tiny-invariant";
 import * as z from "zod";
 
-import {confidenceRanges, getConfidenceRange} from "./confidence";
+import {CONFIDENCE_RANGES, getConfidenceRange} from "./confidence";
 import {isDefined} from "./is-defined";
 import {getQuestById} from "./quests";
 
@@ -48,9 +48,9 @@ export async function matchQuestPhoto(questId: number, imageDataUrl: string) {
               6. Only accept photos that look like they were taken in the real world
 
               Give your answer:
-              - confidence: ${confidenceRanges.poor.join("-")} = doesn't match the quest OR looks like an internet screenshot/website
-              - confidence: ${confidenceRanges.partial.join("-")} = matches a little bit
-              - confidence: ${confidenceRanges.excellent.join("-")} = matches very well AND is clearly a real photo
+              - confidence: ${CONFIDENCE_RANGES.poor.join("-")} = doesn't match the quest OR looks like an internet screenshot/website
+              - confidence: ${CONFIDENCE_RANGES.partial.join("-")} = matches a little bit
+              - confidence: ${CONFIDENCE_RANGES.excellent.join("-")} = matches very well AND is clearly a real photo
               - reason: explain why in 1-2 sentences
               - hint: if it doesn't match well, say what's missing. If it matches well, say something nice
             `,
