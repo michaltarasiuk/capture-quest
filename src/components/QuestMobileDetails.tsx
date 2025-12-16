@@ -9,7 +9,7 @@ import {isDefined} from "#app/lib/is-defined";
 import {QuestHeader} from "./QuestHeader";
 import {QuestPhotoCapture} from "./QuestPhotoCapture";
 
-export function MobileQuestDetails() {
+export function QuestMobileDetails() {
   const quest = useQuest();
   if (!isDefined(quest)) {
     return null;

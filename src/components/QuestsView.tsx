@@ -9,8 +9,8 @@ import {SkeletonStats, Stats} from "#app/components/Stats";
 import {cn} from "#app/lib/cn";
 import {isMobile} from "#app/lib/media";
 
-const MobileQuestDetails = dynamic(
-  () => import("./MobileQuestDetails").then((m) => m.MobileQuestDetails),
+const QuestMobileDetails = dynamic(
+  () => import("./QuestMobileDetails").then((m) => m.QuestMobileDetails),
   {ssr: false},
 );
 
@@ -34,7 +34,7 @@ export function QuestsView() {
         />
         <QuestDetails ref={detailsRef} />
       </div>
-      {!isDetailsVisible && <MobileQuestDetails />}
+      {!isDetailsVisible && <QuestMobileDetails />}
     </>
   );
 }
