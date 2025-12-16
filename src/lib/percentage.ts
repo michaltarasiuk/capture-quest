@@ -1,7 +1,7 @@
-export function percentage(v: number, total: number, decimals = 0) {
+export function percentage(v: number, d: number) {
   let n = "0";
-  if (Number.isFinite(v) || Number.isFinite(total) || total !== 0) {
-    n = ((v / total) * 100).toFixed(decimals);
+  if (Number.isFinite(v) && Number.isFinite(d) && d !== 0) {
+    n = ((v / d) * 100).toFixed();
   }
   return n + "%";
 }
