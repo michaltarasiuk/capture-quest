@@ -3,6 +3,7 @@ import {CircleIcon, XIcon} from "lucide-react";
 import {useEffect, useRef, useState} from "react";
 
 import {useEscapeKey} from "#app/hooks/use-escape-key";
+import {captureVideoFrame} from "#app/lib/capture-video-frame";
 import {cn} from "#app/lib/cn";
 import {isDefined} from "#app/lib/is-defined";
 
@@ -21,16 +22,13 @@ export function Camera({stream, onCapture, onClose}: CameraProps) {
     }
   }, [stream]);
   useEscapeKey(onClose);
-  async function capturePhoto() {
+  function capturePhoto() {
     if (isDefined(videoRef.current) && isDefined(canvasRef.current)) {
-      const video = videoRef.current;
-      const canvas = canvasRef.current;
-      canvas.width = video.videoWidth;
-      canvas.height = video.videoHeight;
-      const context = canvas.getContext("2d");
-      if (isDefined(context)) {
-        context.drawImage(video, 0, 0);
-        const imageDataUrl = canvas.toDataURL("image/jpeg");
+      const imageDataUrl = captureVideoFrame(
+        videoRef.current,
+        canvasRef.current,
+      );
+      if (isDefined(imageDataUrl)) {
         onCapture(imageDataUrl);
       }
     }

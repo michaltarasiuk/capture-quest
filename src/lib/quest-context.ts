@@ -1,7 +1,8 @@
-import {createContext} from "react";
-
 import type {useQuest} from "#app/hooks/use-quest";
 
-export const QuestContext = createContext<ReturnType<typeof useQuest> | null>(
-  null,
-);
+import {createSafeContext} from "./create-safe-context";
+
+type Quest = NonNullable<ReturnType<typeof useQuest>>;
+
+export const [QuestProvider, useQuestContext] =
+  createSafeContext<Quest>("Quest");

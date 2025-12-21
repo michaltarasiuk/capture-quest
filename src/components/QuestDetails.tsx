@@ -2,8 +2,8 @@
 
 import {CardBody, CardFooter, Skeleton} from "@heroui/react";
 
-import {useQuestContext} from "#app/hooks/use-quest-context";
 import {cn} from "#app/lib/cn";
+import {useQuestContext} from "#app/lib/quest-context";
 
 import {Card} from "./Card";
 import {QuestHeader} from "./QuestHeader";
@@ -15,11 +15,7 @@ export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
   return (
     <div ref={ref} className={cn("order-first", "lg:order-none")}>
       <Card className={cn("sticky top-3")}>
-        <QuestHeader
-          title={quest.title}
-          difficulty={quest.difficulty}
-          completed={quest.completed}
-        />
+        <QuestHeader />
         <CardBody className={cn("space-y-3")}>
           <div>
             <h3 className={cn("font-semibold uppercase")}>Description</h3>

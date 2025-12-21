@@ -1,18 +1,16 @@
+import {useAtomValue} from "jotai";
 import {useSearchParams} from "next/navigation";
 
 import {isDefined} from "#app/lib/is-defined";
-
-import {useQuests} from "./use-quests";
+import {quests} from "#app/lib/quests";
+import {completedQuestsAtom} from "#app/lib/storage";
 
 export function useQuestId() {
-  const quests = useQuests();
+  const completedQuests = useAtomValue(completedQuestsAtom);
   const questIdParam = useSearchParams().get("id");
-  let questId: number | undefined;
   if (isDefined(questIdParam)) {
-    questId = Number(questIdParam);
-  } else {
-    const incompleteQuest = quests.find((q) => !q.completed);
-    questId = incompleteQuest?.id;
+    return Number(questIdParam);
   }
-  return questId;
+  const incompleteQuest = quests.find((q) => !completedQuests.has(q.id));
+  return incompleteQuest?.id;
 }

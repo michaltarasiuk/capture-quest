@@ -1,9 +1,9 @@
 import {addToast} from "@heroui/react";
 import {useSetAtom} from "jotai";
 
-import {useQuestContext} from "#app/hooks/use-quest-context";
 import {isConfidenceExcellent} from "#app/lib/confidence";
 import {matchQuestPhoto} from "#app/lib/match-quest-photo";
+import {useQuestContext} from "#app/lib/quest-context";
 import {completedQuestsAtom} from "#app/lib/storage";
 
 import {PhotoCapture} from "./PhotoCapture";

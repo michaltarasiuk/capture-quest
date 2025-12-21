@@ -1,9 +1,5 @@
-import {useEventListener} from "usehooks-ts";
+import {useKeyPress} from "./use-key-press";
 
 export function useEscapeKey(fn: () => void) {
-  useEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      fn();
-    }
-  });
+  useKeyPress("Escape", fn);
 }
