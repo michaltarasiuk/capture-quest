@@ -5,6 +5,7 @@ import {useIntersectionObserver} from "usehooks-ts";
 
 import {QuestDetails, SkeletonQuestDetails} from "#app/components/QuestDetails";
 import {QuestList, SkeletonQuestList} from "#app/components/QuestList";
+import {QuestProvider} from "#app/components/QuestProvider";
 import {SkeletonStats, Stats} from "#app/components/Stats";
 import {cn} from "#app/lib/cn";
 import {isMobile} from "#app/lib/media";
@@ -32,9 +33,13 @@ export function QuestsView() {
             }
           }}
         />
-        <QuestDetails ref={detailsRef} />
+        <QuestProvider>
+          <QuestDetails ref={detailsRef} />
+        </QuestProvider>
       </div>
-      {!isDetailsVisible && <QuestMobileDetails />}
+      <QuestProvider>
+        {!isDetailsVisible && <QuestMobileDetails />}
+      </QuestProvider>
     </>
   );
 }

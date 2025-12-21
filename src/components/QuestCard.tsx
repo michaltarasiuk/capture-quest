@@ -1,5 +1,4 @@
 import {CardBody, Skeleton} from "@heroui/react";
-import {AwardIcon} from "lucide-react";
 
 import {useQuestId} from "#app/hooks/use-quest-id";
 import {cn} from "#app/lib/cn";
@@ -7,6 +6,7 @@ import type {Quest} from "#app/lib/quests";
 
 import {Card} from "./Card";
 import {DifficultyChip} from "./DifficultyChip";
+import {QuestTitle} from "./QuestTitle";
 import {Text} from "./Text";
 
 interface QuestCardProps
@@ -35,16 +35,8 @@ export function QuestCard({
       onPress={onPress}>
       <CardBody className={cn("flex flex-row gap-2")}>
         <div className={cn("flex-1")}>
-          <h3 className={cn("flex items-center gap-1 font-semibold")}>
-            {title}
-            {completed && (
-              <AwardIcon
-                className={cn(
-                  "size-5 stroke-emerald-500",
-                  "dark:stroke-emerald-400",
-                )}
-              />
-            )}
+          <h3>
+            <QuestTitle title={title} completed={completed} />
           </h3>
           <Text>{description}</Text>
         </div>

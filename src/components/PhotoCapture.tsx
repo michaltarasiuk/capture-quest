@@ -3,13 +3,12 @@
 import {Button} from "@heroui/react";
 import {CameraIcon} from "lucide-react";
 import {useTransition} from "react";
-import {FocusScope} from "react-aria";
-import {createPortal} from "react-dom";
 
 import {useVideoStream} from "#app/hooks/use-video-stream";
 import {isDefined} from "#app/lib/is-defined";
 
 import {Camera} from "./Camera";
+import {Overlay} from "./Overlay";
 
 interface PhotoCaptureProps {
   isDisabled: boolean;
@@ -30,20 +29,18 @@ export function PhotoCapture({isDisabled, onCapture}: PhotoCaptureProps) {
         onPress={startStream}>
         Capture photo
       </Button>
-      {isDefined(stream) &&
-        createPortal(
-          <FocusScope autoFocus contain restoreFocus>
-            <Camera
-              stream={stream}
-              onCapture={(imageDataUrl) => {
-                stopStream();
-                startTransition(() => onCapture(imageDataUrl));
-              }}
-              onClose={stopStream}
-            />
-          </FocusScope>,
-          document.body,
-        )}
+      {isDefined(stream) && (
+        <Overlay>
+          <Camera
+            stream={stream}
+            onCapture={(imageDataUrl) => {
+              stopStream();
+              startTransition(() => onCapture(imageDataUrl));
+            }}
+            onClose={stopStream}
+          />
+        </Overlay>
+      )}
     </>
   );
 }

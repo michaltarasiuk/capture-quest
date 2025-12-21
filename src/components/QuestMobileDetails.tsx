@@ -2,18 +2,14 @@
 
 import {Card, CardFooter} from "@heroui/react";
 
-import {useQuest} from "#app/hooks/use-quest";
+import {useQuestContext} from "#app/hooks/use-quest-context";
 import {cn} from "#app/lib/cn";
-import {isDefined} from "#app/lib/is-defined";
 
 import {QuestHeader} from "./QuestHeader";
 import {QuestPhotoCapture} from "./QuestPhotoCapture";
 
 export function QuestMobileDetails() {
-  const quest = useQuest();
-  if (!isDefined(quest)) {
-    return null;
-  }
+  const quest = useQuestContext();
   return (
     <Card
       className={cn(

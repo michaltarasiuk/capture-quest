@@ -1,7 +1,6 @@
 import {Button, Skeleton} from "@heroui/react";
 import {CircleIcon, XIcon} from "lucide-react";
 import {useEffect, useRef, useState} from "react";
-import {useScrollLock} from "usehooks-ts";
 
 import {useEscapeKey} from "#app/hooks/use-escape-key";
 import {cn} from "#app/lib/cn";
@@ -21,7 +20,6 @@ export function Camera({stream, onCapture, onClose}: CameraProps) {
       videoRef.current.srcObject = stream;
     }
   }, [stream]);
-  useScrollLock();
   useEscapeKey(onClose);
   async function capturePhoto() {
     if (isDefined(videoRef.current) && isDefined(canvasRef.current)) {

@@ -2,9 +2,8 @@
 
 import {CardBody, CardFooter, Skeleton} from "@heroui/react";
 
-import {useQuest} from "#app/hooks/use-quest";
+import {useQuestContext} from "#app/hooks/use-quest-context";
 import {cn} from "#app/lib/cn";
-import {isDefined} from "#app/lib/is-defined";
 
 import {Card} from "./Card";
 import {QuestHeader} from "./QuestHeader";
@@ -12,10 +11,7 @@ import {QuestPhotoCapture} from "./QuestPhotoCapture";
 import {Text} from "./Text";
 
 export function QuestDetails({ref}: {ref: React.Ref<HTMLDivElement>}) {
-  const quest = useQuest();
-  if (!isDefined(quest)) {
-    return null;
-  }
+  const quest = useQuestContext();
   return (
     <div ref={ref} className={cn("order-first", "lg:order-none")}>
       <Card className={cn("sticky top-3")}>
