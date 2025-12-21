@@ -7,4 +7,3 @@ export function useKeyPress(key: string, fn: () => void) {
     }
   });
 }
-
