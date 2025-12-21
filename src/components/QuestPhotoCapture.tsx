@@ -4,13 +4,13 @@ import {useSetAtom} from "jotai";
 import {isConfidenceExcellent} from "#app/lib/confidence";
 import {matchQuestPhoto} from "#app/lib/match-quest-photo";
 import {useQuestContext} from "#app/lib/quest-context";
-import {completedQuestsAtom} from "#app/lib/storage";
+import {completeQuestAtom} from "#app/lib/storage";
 
 import {PhotoCapture} from "./PhotoCapture";
 
 export function QuestPhotoCapture() {
   const quest = useQuestContext();
-  const setCompletedQuests = useSetAtom(completedQuestsAtom);
+  const completeQuest = useSetAtom(completeQuestAtom);
   return (
     <PhotoCapture
       isDisabled={quest.completed}
@@ -21,9 +21,7 @@ export function QuestPhotoCapture() {
             imageDataUrl,
           );
           if (isConfidenceExcellent(confidence)) {
-            setCompletedQuests((completedQuests) =>
-              completedQuests.add(quest.id),
-            );
+            completeQuest(quest.id);
             addToast({
               title: "Quest completed",
               description: `${reason} ${hint}`,

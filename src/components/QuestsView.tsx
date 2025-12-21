@@ -35,11 +35,9 @@ export function QuestsView() {
         />
         <QuestProvider>
           <QuestDetails ref={detailsRef} />
+          {!isDetailsVisible && <QuestMobileDetails />}
         </QuestProvider>
       </div>
-      <QuestProvider>
-        {!isDetailsVisible && <QuestMobileDetails />}
-      </QuestProvider>
     </>
   );
 }

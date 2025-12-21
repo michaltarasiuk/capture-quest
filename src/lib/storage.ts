@@ -9,37 +9,34 @@ import * as z from "zod";
 import {percentage} from "./percentage";
 import {difficultyToPoints, quests} from "./quests";
 
-const completedQuestsStorageAtom = atomWithStorage(
+const completedQuestsStorageAtom = atomWithStorage<number[]>(
   "completed_quests",
   [],
   withStorageValidator(isQuestIdArray)(createJSONStorage()),
   {getOnInit: true},
 );
 
-export const completedQuestsAtom = atom(
-  (get) => new Set(get(completedQuestsStorageAtom)),
-  (get, set, update: <T extends Set<number>>(completedQuests: T) => T) => {
-    const completedQuests = get(completedQuestsAtom);
-    set(completedQuestsStorageAtom, [...update(completedQuests)]);
-  },
-);
-
-export const completedQuestsCountAtom = atom((get) => {
-  const completedQuests = get(completedQuestsAtom);
-  return completedQuests.size;
+export const completedQuestsAtom = atom((get) => {
+  const completedQuests = get(completedQuestsStorageAtom);
+  return new Set(completedQuests);
 });
 
-export const completedQuestsPercentageAtom = atom((get) => {
-  const completedQuestsCount = get(completedQuestsCountAtom);
-  return percentage(completedQuestsCount, quests.length);
+export const completeQuestAtom = atom(null, (get, set, questId: number) => {
+  const current = get(completedQuestsStorageAtom);
+  if (!current.includes(questId)) {
+    set(completedQuestsStorageAtom, [...current, questId]);
+  }
 });
 
-export const completedQuestsPointsAtom = atom((get) => {
+export const statsAtom = atom((get) => {
   const completedQuests = get(completedQuestsAtom);
-  return quests
+  const count = completedQuests.size;
+  const progress = percentage(count, quests.length);
+  const points = quests
     .filter((q) => completedQuests.has(q.id))
     .map((q) => difficultyToPoints(q.difficulty))
     .reduce((a, b) => a + b, 0);
+  return {count, progress, points};
 });
 
 function isQuestIdArray(v: unknown): v is number[] {

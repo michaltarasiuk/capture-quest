@@ -5,19 +5,13 @@ import {cva, type VariantProps} from "cva";
 import {useAtomValue} from "jotai";
 
 import {cn} from "#app/lib/cn";
-import {
-  completedQuestsCountAtom,
-  completedQuestsPercentageAtom,
-  completedQuestsPointsAtom,
-} from "#app/lib/storage";
+import {statsAtom} from "#app/lib/storage";
 
 import {Card} from "./Card";
 import {Text} from "./Text";
 
 export function Stats() {
-  const count = useAtomValue(completedQuestsCountAtom);
-  const percentage = useAtomValue(completedQuestsPercentageAtom);
-  const points = useAtomValue(completedQuestsPointsAtom);
+  const {count, progress, points} = useAtomValue(statsAtom);
   return (
     <div
       className={cn(
@@ -34,7 +28,7 @@ export function Stats() {
         <Text>Total Points</Text>
       </StatCard>
       <StatCard>
-        <StatHeading variant="violet">{percentage}</StatHeading>
+        <StatHeading variant="violet">{progress}</StatHeading>
         <Text>Progress</Text>
       </StatCard>
     </div>
